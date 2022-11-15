@@ -2,7 +2,6 @@ import 'package:assigment2/consts/app_colors_strings.dart';
 import 'package:assigment2/widgets/text_widget.dart';
 
 import 'package:flutter/material.dart';
-import '../../consts/app_text_strings.dart';
 
 class ButtonWidget extends StatelessWidget {
   ButtonWidget({
@@ -39,6 +38,8 @@ class ButtonWidget extends StatelessWidget {
                   ])),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: EdgeInsets.zero,
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
                 ),

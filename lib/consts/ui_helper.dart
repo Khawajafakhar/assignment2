@@ -6,4 +6,6 @@ class UiHelper {
     static const verticalSmall1 = SizedBox(height: 40);
 
   static const verticalMedium = SizedBox(height: 75);
+    static const verticalLarge = SizedBox(height: 140);
+
 }

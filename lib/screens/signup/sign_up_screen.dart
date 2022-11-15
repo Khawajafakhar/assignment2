@@ -9,6 +9,7 @@ import '../../consts/app_img_strings.dart';
 import '../../widgets/textfields/password_textfield.dart';
 import '../../widgets/rich_text_widget.dart';
 import '../signin/sign_in_screen.dart';
+import '../../widgets/app_logo_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const routename = 'sign-up-screen';
@@ -34,11 +35,7 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
             children: [
               UiHelper.verticalMedium,
-              SizedBox(
-                width: double.infinity,
-                height: 100,
-                child: Image.asset(AppImages.imgLogo),
-              ),
+             const AppLogoWidget(),
               UiHelper.verticalSmall1,
               Form(
                   child: Padding(

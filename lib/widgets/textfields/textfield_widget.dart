@@ -3,7 +3,7 @@ import '../../consts/app_colors_strings.dart';
 import '../../consts/fonts.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({
+   const TextFieldWidget({
     Key? key,
     required this.textController,
     this.inputType,

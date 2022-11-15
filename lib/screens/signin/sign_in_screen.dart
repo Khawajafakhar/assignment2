@@ -11,6 +11,8 @@ import './components/social_accounts.dart';
 import '../../widgets/rich_text_widget.dart';
 import '../../widgets/appBar_widget.dart';
 import '../../screens/signup/sign_up_screen.dart';
+import '../../widgets/app_logo_widget.dart';
+import '../forgot_password/forgot_password_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   static const routeName = 'signin-screen';
@@ -33,11 +35,7 @@ class SignInScreen extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             UiHelper.verticalMedium,
-            SizedBox(
-              width: double.infinity,
-              height: 100,
-              child: Image.asset(AppImages.imgLogo),
-            ),
+            const AppLogoWidget(),
             UiHelper.verticalSmall1,
             Form(
                 key: formKey,
@@ -57,9 +55,10 @@ class SignInScreen extends StatelessWidget {
                         hint: AppStrings.hintTxtPass,
                       ),
                       UiHelper.verticalXSmall,
-                      const TextButtonwidget(
+                       TextButtonwidget(
                           txt: AppStrings.btnTxtForgotPass,
-                          align: Alignment.topRight),
+                          align: Alignment.topRight,
+                          onPressed: onForgotPressed,),
                       ButtonWidget(
                         height: 40,
                         width: double.infinity,
@@ -75,7 +74,7 @@ class SignInScreen extends StatelessWidget {
             RichTextWidget(
               txt: AppStrings.txtNewAcc,
               txt2: AppStrings.txtSignUp,
-              onPressed: onPressed,
+              onPressed: onSignUpPressed,
             ),
           ]),
         ),
@@ -83,7 +82,11 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  void onPressed() {
+  void onSignUpPressed() {
     Navigator.of(ctx!).pushNamed(SignUpScreen.routename);
+  }
+
+  void onForgotPressed(){
+    Navigator.of(ctx!).pushNamed(ForgotPasswordScreen.routeName);
   }
 }

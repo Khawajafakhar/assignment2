@@ -2,6 +2,7 @@ import 'package:assigment2/screens/onBoard/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import './screens/signin/sign_in_screen.dart';
 import './screens/signup/sign_up_screen.dart';
+import './screens/forgot_password/forgot_password_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       home: OnBoardingScreen(),
       routes: {
         SignInScreen.routeName: (context) => SignInScreen(),
-        SignUpScreen.routename: (context) =>  SignUpScreen()
+        SignUpScreen.routename: (context) => SignUpScreen(),
+        ForgotPasswordScreen.routeName:(context) => ForgotPasswordScreen(),
       },
     );
   }
