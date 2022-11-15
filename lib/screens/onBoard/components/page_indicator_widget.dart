@@ -15,6 +15,8 @@ class PageIndicatorWidget extends StatelessWidget {
         controller: controller,
         count: 3,
         effect: const SwapEffect(
+            dotWidth: 10,
+            dotHeight: 10,
             activeDotColor: AppColors.activeDotColor,
             dotColor: AppColors.inActiveDotColor),
       ),

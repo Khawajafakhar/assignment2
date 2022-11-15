@@ -26,9 +26,10 @@ class OnBoardWidget extends StatelessWidget {
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children:const [
                 UiHelper.verticalXSmall,
                 TextWidget(
+                  textAlign: TextAlign.center,
                   txt: AppStrings.onBoardTxt1,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -36,6 +37,7 @@ class OnBoardWidget extends StatelessWidget {
                 ),
                 UiHelper.verticalSmall,
                 TextWidget(
+                  textAlign: TextAlign.center,
                   txt: AppStrings.onBoardTxt2,
                   fontSize: 16,
                   color: AppColors.txtColorWhite,
