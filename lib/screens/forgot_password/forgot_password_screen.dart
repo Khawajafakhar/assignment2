@@ -9,15 +9,19 @@ import '../../widgets/textfields/textfield_widget.dart';
 import '../../consts/app_img_strings.dart';
 import '../../widgets/buttons/elevated_button_widget.dart';
 import '../../widgets/rich_text_widget.dart';
+import '../../screens/resetpassword/reset_pass_screen.dart';
+import '../signup/sign_up_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const routeName = 'forgot-pass-screen';
   ForgotPasswordScreen({super.key});
   final TextEditingController emailcont = TextEditingController();
   final GlobalKey<FormState> resetFormKey = GlobalKey();
+  BuildContext? ctx;
 
   @override
   Widget build(BuildContext context) {
+    ctx = context;
     return GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: Scaffold(
@@ -51,18 +55,28 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ButtonWidget(
                     height: 40,
                     width: double.infinity,
-                    txt: AppStrings.txtSignIn,
+                    txt: AppStrings.txtResetPass,
                     fontSize: 18,
+                    onPressed: onResetPassPressed,
                   ),
                   UiHelper.verticalLarge,
-                  const RichTextWidget(
+                  RichTextWidget(
                     txt: AppStrings.txtNewAcc,
                     txt2: AppStrings.txtSignUp,
+                    onPressed: onSignUpPressed,
                   ),
                 ],
               ),
             ),
           ),
         ));
+  }
+
+  void onResetPassPressed() {
+    Navigator.of(ctx!).pushNamed(ResetPasswordScreen.routeName);
+  }
+
+  void onSignUpPressed() {
+    Navigator.of(ctx!).pushNamed(SignUpScreen.routename);
   }
 }

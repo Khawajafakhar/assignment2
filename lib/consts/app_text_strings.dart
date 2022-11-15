@@ -14,10 +14,16 @@ class AppStrings {
   static const txtSignUp = 'Sign Up';
   static const txtNewAcc = 'Don\'t have an account ? ';
   static const haveAccTxt = 'Already have an account ? ';
+    static const backToTxt = 'Back to ';
+
 
   static const hintTxtName = 'Name';
   static const hintTxtCnfrmPass = 'Confirm Password';
   static const txtForgotPass = 'Forgot Password';
+  static const txtResetPass = 'Reset Password';
+
   static const txtForgotScreen =
       'Enter your email or phone number to retrieve your password.';
+static const txtResetScreen =
+      'Check your email or phone number to retrieve your password.';      
 }
