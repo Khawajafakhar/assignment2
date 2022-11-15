@@ -6,11 +6,15 @@ class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputAction? inputAction;
+  final void Function(dynamic)? onFieldSubmitted;
+  final FocusNode? focusNode;
   const PasswordTextField({
     Key? key,
     required this.controller,
     required this.hint,
     this.inputAction,
+    this.onFieldSubmitted,
+    this.focusNode
   }) : super(key: key);
 
   @override
@@ -22,6 +26,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
+      focusNode: widget.focusNode,
+      onFieldSubmitted: widget.onFieldSubmitted,
       textController: widget.controller,
       isObscure: isObscure,
       hint: widget.hint,

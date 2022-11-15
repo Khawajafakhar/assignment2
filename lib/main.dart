@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       home: OnBoardingScreen(),
       routes: {
         SignInScreen.routeName: (context) => SignInScreen(),
-        SignUpScreen.routename: (context) => const SignUpScreen()
+        SignUpScreen.routename: (context) =>  SignUpScreen()
       },
     );
   }

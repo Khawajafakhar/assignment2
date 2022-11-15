@@ -11,5 +11,9 @@ class AppStrings {
   static const socialAccTxt = 'Or by social accounts';
   static const txtSignUp = 'Sign Up';
   static const  txtNewAcc = 'Don\'t have an account ? ';
+    static const  haveAccTxt = 'Already have an account ? ';
+
   static const  hintTxtName = 'Name';
+    static const  hintTxtCnfrmPass = 'Confirm Password';
+
 }

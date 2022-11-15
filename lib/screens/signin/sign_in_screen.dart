@@ -8,18 +8,21 @@ import '../../widgets/textfields/textfield_widget.dart';
 import '../../consts/ui_helper.dart';
 import '../../widgets/textfields/password_textfield.dart';
 import './components/social_accounts.dart';
-import './components/rich_text_widget.dart';
+import '../../widgets/rich_text_widget.dart';
 import '../../widgets/appBar_widget.dart';
+import '../../screens/signup/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   static const routeName = 'signin-screen';
   SignInScreen({super.key});
- final GlobalKey<FormState> formKey = GlobalKey<FormState>();
- final TextEditingController emailController = TextEditingController();
- final TextEditingController passController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  BuildContext? ctx;
 
   @override
   Widget build(BuildContext context) {
+    ctx = context;
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
@@ -27,7 +30,8 @@ class SignInScreen extends StatelessWidget {
         backgroundColor: AppColors.backGroundColor,
         appBar: const AppBarWidget(txt: AppStrings.txtSignIn),
         body: SingleChildScrollView(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             UiHelper.verticalMedium,
             SizedBox(
               width: double.infinity,
@@ -47,7 +51,7 @@ class SignInScreen extends StatelessWidget {
                         prefix: Image.asset(AppImages.imgEmailIcon),
                         inputAction: TextInputAction.next,
                       ),
-                      UiHelper.verticalSmall,
+                      UiHelper.verticalXSmall,
                       PasswordTextField(
                         controller: passController,
                         hint: AppStrings.hintTxtPass,
@@ -68,13 +72,18 @@ class SignInScreen extends StatelessWidget {
             UiHelper.verticalXSmall,
             const SocialAccountWidget(),
             UiHelper.verticalMedium,
-            const RichTextWidget(
+            RichTextWidget(
               txt: AppStrings.txtNewAcc,
               txt2: AppStrings.txtSignUp,
+              onPressed: onPressed,
             ),
           ]),
         ),
       ),
     );
+  }
+
+  void onPressed() {
+    Navigator.of(ctx!).pushNamed(SignUpScreen.routename);
   }
 }
