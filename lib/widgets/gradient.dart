@@ -3,8 +3,9 @@ import '../widgets/text_widget.dart';
 import '../consts/app_colors_strings.dart';
 
 class GradientIcon extends StatelessWidget {
-  GradientIcon(
-      {this.icon,
+  const GradientIcon(
+      {super.key,
+      this.icon,
       this.size = 30,
       this.gradient = AppColors.pinkishGradient,
       this.txt});

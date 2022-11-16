@@ -9,7 +9,7 @@ import 'bottom_Navigation_pages/settings_page.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = 'dashboard-screen';
-  DashBoardScreen({super.key});
+ const DashBoardScreen({super.key});
 
   @override
   State<DashBoardScreen> createState() => _DashBoardScreenState();

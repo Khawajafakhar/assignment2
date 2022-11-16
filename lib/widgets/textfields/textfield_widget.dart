@@ -11,6 +11,7 @@ class TextFieldWidget extends StatelessWidget {
     this.isObscure = false,
     this.padding = const EdgeInsets.all(0),
     this.hintColor = AppColors.txtColorWhite,
+    this.fillColor=AppColors.textFieldColor,
     this.focusNode,
     this.onFieldSubmitted,
     this.onChanged,
@@ -31,6 +32,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextEditingController textController;
   final EdgeInsets padding;
   final Color hintColor;
+  final Color fillColor;
   final FocusNode? focusNode;
   final ValueChanged? onFieldSubmitted;
   final ValueChanged? onChanged;
@@ -62,7 +64,7 @@ class TextFieldWidget extends StatelessWidget {
       keyboardType: inputType,
       style: const TextStyle(color: AppColors.txtColorWhite),
       decoration: InputDecoration(
-          fillColor: AppColors.textFieldColor,
+          fillColor: fillColor,
           filled: true,
           hintText: hint,
           hintStyle: const TextStyle(
@@ -96,11 +98,11 @@ class TextFieldWidget extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder get enabledBorder => OutlineInputBorder(
+  OutlineInputBorder get enabledBorder =>const OutlineInputBorder(
     borderSide: BorderSide(
       color: AppColors.textFieldColor
     ),
-        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        borderRadius:  BorderRadius.all(Radius.circular(10.0)),
       );
 
   OutlineInputBorder get disabledBorder => const OutlineInputBorder(

@@ -1,10 +1,10 @@
 import 'package:assigment2/consts/app_img_strings.dart';
 import 'package:flutter/material.dart';
-import './onBoard_widget.dart';
+import 'onboard_widget.dart';
 
 class PageViewWidget extends StatelessWidget {
-  PageViewWidget({super.key, required this.controller});
-  PageController controller;
+ const PageViewWidget({super.key, required this.controller});
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {

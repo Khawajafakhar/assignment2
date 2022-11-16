@@ -1,6 +1,6 @@
 import 'package:assigment2/consts/app_colors_strings.dart';
 import 'package:assigment2/consts/app_text_strings.dart';
-import 'package:assigment2/screens/onBoard/components/pageView_widget.dart';
+import 'package:assigment2/screens/onBoard/components/pageview_widget.dart';
 import 'package:flutter/material.dart';
 import '../onBoard/components/page_indicator_widget.dart';
 import '../../widgets/buttons/elevated_button_widget.dart';

@@ -3,6 +3,7 @@ import '../../../../consts/app_img_strings.dart';
 import '../../../../consts/app_colors_strings.dart';
 import '../../../../widgets/text_widget.dart';
 import '../../../../consts/app_text_strings.dart';
+import '../../../../widgets/buttons/floating_button_widget.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -34,6 +35,7 @@ class NewsPage extends StatelessWidget {
                           ),
                         ]),
                   ))),
+                  floatingActionButton: const FloatingButtonWidget(),
           body: Container(
             width: double.infinity,
             decoration: const BoxDecoration(

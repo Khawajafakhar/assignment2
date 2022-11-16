@@ -5,6 +5,12 @@ class AppStrings {
   static const btnTxtGetStarted = 'Get Started';
   static const txtSignIn = 'Sign In';
   static const hintTxtEmail = 'Email';
+  static const addNewstxt = 'Add News';
+  static const titleTxt = 'Title';
+  static const detailsTxt = 'Details';
+  static const matchTxt = 'Match:';
+  static const searchTxt = 'Search';
+
   static const hintTxtEmailOrPhone = 'Email or Phone Number';
 
   static const hintTxtPass = 'Password';
@@ -31,8 +37,7 @@ class AppStrings {
   static const newsTxt = 'News';
   static const settingsTxt = 'Settings';
 
-    static const feedsTxt = 'FEEDS';
+  static const feedsTxt = 'FEEDS';
   static const myFeedsTxt = 'MY FEEDS';
   static const approvelTxt = 'APPROVALS';
-
 }

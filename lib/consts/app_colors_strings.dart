@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -23,4 +22,5 @@ class AppColors {
     Color(0xFFFF8D6D),
     Color(0xFFF8485E),
   ]);
+  
 }

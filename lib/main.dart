@@ -5,6 +5,7 @@ import './screens/signup/sign_up_screen.dart';
 import './screens/forgot_password/forgot_password_screen.dart';
 import './screens/resetpassword/reset_pass_screen.dart';
 import './screens/dashboard/dashboard_screen.dart';
+import './screens/addnews/add_news.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         SignUpScreen.routename: (context) => SignUpScreen(),
         ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
         ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
-        DashBoardScreen.routeName:(context) => DashBoardScreen(),
+        DashBoardScreen.routeName: (context) => const DashBoardScreen(),
+        AddNewsScreen.routeName: (context) =>  AddNewsScreen()
       },
     );
   }
