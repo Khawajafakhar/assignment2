@@ -30,4 +30,9 @@ class AppStrings {
   static const leaderTxt = 'Leader';
   static const newsTxt = 'News';
   static const settingsTxt = 'Settings';
+
+    static const feedsTxt = 'FEEDS';
+  static const myFeedsTxt = 'MY FEEDS';
+  static const approvelTxt = 'APPROVALS';
+
 }

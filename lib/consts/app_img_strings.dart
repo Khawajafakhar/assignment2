@@ -8,4 +8,5 @@ class AppImages {
   static const imgIconFB = 'assets/images/imgIconFB.png';
   static const imgIconTwitter = 'assets/images/imgIconTwitter.png';
   static const imgIconUser = 'assets/images/imgIconUser.png';
+  static const imgBackground = 'assets/images/imgBackground.png';
 }

@@ -9,6 +9,8 @@ class AppColors {
   static const textFieldColor = Color(0xFF1B1F2A);
   static const colorWhite = Color(0xFFF0F1F1);
   static const richTextBtnColor = Color(0xFF71DBD4);
+    static const indicatorColor = Color(0xFFF8485E);
+
   static const pinkishGradient = LinearGradient(colors: [
     Color(0xFFF67599),
     Color(0xFFE31C79),

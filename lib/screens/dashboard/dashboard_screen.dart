@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../widgets/bottom_appbar_widget.dart';
-import './pages/fixture_page.dart';
-import './pages/home_page.dart';
-import './pages/leader_page.dart';
-import './pages/news_page.dart';
-import './pages/settings_page.dart';
+import 'bottom_Navigation_pages/fixture_page.dart';
+import 'bottom_Navigation_pages/home_page.dart';
+import 'bottom_Navigation_pages/leader_page.dart';
+import 'bottom_Navigation_pages/news_page/news_page.dart';
+import 'bottom_Navigation_pages/settings_page.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = 'dashboard-screen';
