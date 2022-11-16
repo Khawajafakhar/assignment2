@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
+import '../widgets/text_widget.dart';
+import '../consts/app_colors_strings.dart';
 
-class Gradientwidget extends StatelessWidget {
-  Gradientwidget({
-    this.gradient = const LinearGradient(colors: [
-      Color(0xFFFFC56E),
-      Color(0xFFFFB36E),
-      Color(0xFFFF8D6D),
-      Color(0xFFF8485E),
-    ]),
-    this.child,
-  });
+class GradientIcon extends StatelessWidget {
+  GradientIcon(
+      {this.icon,
+      this.size = 30,
+      this.gradient = AppColors.pinkishGradient,
+      this.txt});
+
+  final IconData? icon;
+  final double size;
   final Gradient gradient;
-  final Widget? child;
+  final String? txt;
 
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      blendMode: BlendMode.srcOver,
-      shaderCallback: (bounds) => gradient
-          .createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-      child: child,
+      child: SizedBox(
+        width: size * 1.3,
+        height: size * 1.3,
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: size,
+              color: AppColors.colorWhite,
+            ),
+            TextWidget(
+              txt: txt,
+              fontSize: 12,
+              color: AppColors.colorWhite,
+            ),
+          ],
+        ),
+      ),
+      shaderCallback: (Rect bounds) {
+        final Rect rect = Rect.fromLTRB(0, 0, bounds.width, bounds.height);
+        return gradient.createShader(rect);
+      },
     );
   }
 }

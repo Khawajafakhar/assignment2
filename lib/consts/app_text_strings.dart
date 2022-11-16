@@ -14,8 +14,7 @@ class AppStrings {
   static const txtSignUp = 'Sign Up';
   static const txtNewAcc = 'Don\'t have an account ? ';
   static const haveAccTxt = 'Already have an account ? ';
-    static const backToTxt = 'Back to ';
-
+  static const backToTxt = 'Back to ';
 
   static const hintTxtName = 'Name';
   static const hintTxtCnfrmPass = 'Confirm Password';
@@ -24,6 +23,11 @@ class AppStrings {
 
   static const txtForgotScreen =
       'Enter your email or phone number to retrieve your password.';
-static const txtResetScreen =
-      'Check your email or phone number to retrieve your password.';      
+  static const txtResetScreen =
+      'Check your email or phone number to retrieve your password.';
+  static const homeTxt = 'Home';
+  static const fixtureTxt = 'Fixture';
+  static const leaderTxt = 'Leader';
+  static const newsTxt = 'News';
+  static const settingsTxt = 'Settings';
 }

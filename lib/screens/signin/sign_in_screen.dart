@@ -13,6 +13,7 @@ import '../../widgets/appBar_widget.dart';
 import '../../screens/signup/sign_up_screen.dart';
 import '../../widgets/app_logo_widget.dart';
 import '../forgot_password/forgot_password_screen.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   static const routeName = 'signin-screen';
@@ -30,7 +31,9 @@ class SignInScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.backGroundColor,
-        appBar: const AppBarWidget(txt: AppStrings.txtSignIn),
+        appBar: const AppBarWidget(
+          txt: AppStrings.txtSignIn,
+        ),
         body: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -55,15 +58,17 @@ class SignInScreen extends StatelessWidget {
                         hint: AppStrings.hintTxtPass,
                       ),
                       UiHelper.verticalXSmall,
-                       TextButtonwidget(
-                          txt: AppStrings.btnTxtForgotPass,
-                          align: Alignment.topRight,
-                          onPressed: onForgotPressed,),
+                      TextButtonwidget(
+                        txt: AppStrings.btnTxtForgotPass,
+                        align: Alignment.topRight,
+                        onPressed: onForgotPressed,
+                      ),
                       ButtonWidget(
                         height: 40,
                         width: double.infinity,
                         txt: AppStrings.txtSignIn,
                         fontSize: 18,
+                        onPressed: onSignInPressed,
                       )
                     ],
                   ),
@@ -86,7 +91,10 @@ class SignInScreen extends StatelessWidget {
     Navigator.of(ctx!).pushNamed(SignUpScreen.routename);
   }
 
-  void onForgotPressed(){
+  void onForgotPressed() {
     Navigator.of(ctx!).pushNamed(ForgotPasswordScreen.routeName);
+  }
+  void onSignInPressed() {
+    Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName);
   }
 }
