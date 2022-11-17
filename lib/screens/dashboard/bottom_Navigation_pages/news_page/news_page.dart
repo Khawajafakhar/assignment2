@@ -9,7 +9,6 @@ import 'components/approvals_page.dart';
 import 'components/feed_page.dart';
 import 'components/my_feed_page.dart';
 
-
 class NewsPage extends StatefulWidget {
   NewsPage({super.key});
 
@@ -29,7 +28,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backGroundColor,
+        backgroundColor: AppColors.backGroundColor,
         floatingActionButton: const FloatingButtonWidget(),
         body: SizedBox(
           width: double.infinity,
@@ -39,8 +38,15 @@ class _NewsPageState extends State<NewsPage> {
               TabBarWidget(index: currentIndex, selectedIndex: selectedPage),
               Flexible(
                 child: Container(
-                  decoration:const BoxDecoration(image: DecorationImage(image: AssetImage(AppImages.imgBackground,),fit: BoxFit.cover)),
-                child: newsPages[currentIndex],),
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                    image: AssetImage(
+                      AppImages.imgBackground,
+                    ),
+                    fit: BoxFit.cover,
+                  )),
+                  child: newsPages[currentIndex],
+                ),
               )
             ],
           ),
@@ -49,7 +55,7 @@ class _NewsPageState extends State<NewsPage> {
 
   void selectedPage(index) {
     setState(() {
-      currentIndex=index;
+      currentIndex = index;
     });
   }
 }

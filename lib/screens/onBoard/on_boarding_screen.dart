@@ -14,25 +14,31 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ctx=context;
     Size size=MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backGroundColor,
-      body: Column(
-        
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(height: size.height*0.8,child: PageViewWidget(controller: controller)),
-          SizedBox(height: size.height*0.1,child: PageIndicatorWidget(controller: controller)),
-          SizedBox(height: size.height*0.1,
-            child: ButtonWidget(
-              height: 40,
-              width: 220,
-              txt: AppStrings.btnTxtGetStarted,
-              onPressed: getStartedButton,
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.backGroundColor,
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints:const BoxConstraints(maxWidth: double.infinity,maxHeight: double.infinity),
+            child: Column(
+              
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: size.height*0.8,child: PageViewWidget(controller: controller)),
+                SizedBox(height: size.height*0.1,child: PageIndicatorWidget(controller: controller)),
+                SizedBox(height: size.height*0.1,
+                  child: ButtonWidget(
+                    height: 40,
+                    width: 220,
+                    txt: AppStrings.btnTxtGetStarted,
+                    onPressed: getStartedButton,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
