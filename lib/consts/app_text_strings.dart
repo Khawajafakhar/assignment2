@@ -39,8 +39,7 @@ class AppStrings {
   static const leaderTxt = 'Leader';
   static const newsTxt = 'News';
   static const settingsTxt = 'Settings';
-    static const logOutTxt = 'Logout';
-
+  static const logOutTxt = 'Logout';
 
   static const feedsTxt = 'FEEDS';
   static const myFeedsTxt = 'MY FEEDS';
@@ -71,4 +70,6 @@ class AppStrings {
       color: AppColors.colorWhite,
     ),
   ];
+
+  static const tabBarItems = ['FEED', 'MY FEED', 'APPROVALS'];
 }

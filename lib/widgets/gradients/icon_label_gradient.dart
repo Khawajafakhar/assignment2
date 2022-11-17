@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/text_widget.dart';
-import '../consts/app_colors_strings.dart';
+import '../text_widget.dart';
+import '../../consts/app_colors_strings.dart';
 
 class GradientIcon extends StatelessWidget {
   const GradientIcon(

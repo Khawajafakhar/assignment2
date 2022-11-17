@@ -23,7 +23,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
    const HomePage(),
    const FixturePage(),
    const LeaderPage(),
-   const NewsPage(),
+    NewsPage(),
    const SettingsPage()
   ];
 

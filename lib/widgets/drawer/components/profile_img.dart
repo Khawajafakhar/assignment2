@@ -9,7 +9,7 @@ class ProfileImgWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-      color: AppColors.colorYellow,
+      color: AppColors.colorpinkish,
       dashPattern: const [8, 8],
       strokeWidth: 3,
       borderType: BorderType.Circle,

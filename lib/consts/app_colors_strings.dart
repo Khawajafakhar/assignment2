@@ -9,7 +9,8 @@ class AppColors {
   static const colorWhite = Color(0xFFF0F1F1);
   static const richTextBtnColor = Color(0xFF71DBD4);
   static const indicatorColor = Color(0xFFF8485E);
-  static const colorYellow = Color(0xFFF8485E);
+  static const colorpinkish = Color(0xFFF8485E);
+  static const colorReddidh = Color(0xFFF8495E);
 
   static const pinkishGradient = LinearGradient(
     colors: [
@@ -28,17 +29,13 @@ class AppColors {
     Color(0xFFF8485E),
   ]);
   static const blackishGradient = LinearGradient(
-    colors: [
-       
-      Color(0xFF28314A),
-      Color(0xFF1B1F2A),
-      Color(0XFF1B1F2A)
-    ],end: Alignment.bottomLeft,tileMode: TileMode.mirror
-  );
+      colors: [Color(0xFF28314A), Color(0xFF1B1F2A), Color(0XFF1B1F2A)],
+      end: Alignment.bottomLeft,
+      tileMode: TileMode.mirror);
   static const yellowishGradient2 = LinearGradient(colors: [
-    Color(0xFFFFC56E),
+    Color(0xFFFFE7C3),
     Color(0xFFFFB36E),
-    Color(0xFFFF8D6D),
     Color(0xFFF8485E),
-  ],begin: Alignment.topCenter,end: Alignment.bottomCenter);
+    Color(0xFFFF0726),
+  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../consts/app_colors_strings.dart';
 import '../widgets/text_widget.dart';
 import '../consts/app_text_strings.dart';
-import '../widgets/gradient.dart';
+import 'gradients/icon_label_gradient.dart';
 
 class BottomAppBarWidget extends StatelessWidget {
   BottomAppBarWidget({super.key, this.index = 0,required this.value});

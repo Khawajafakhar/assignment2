@@ -4,46 +4,52 @@ import '../../../../consts/app_colors_strings.dart';
 import '../../../../widgets/text_widget.dart';
 import '../../../../consts/app_text_strings.dart';
 import '../../../../widgets/buttons/floating_button_widget.dart';
+import 'components/tabbar_widget.dart';
+import 'components/approvals_page.dart';
+import 'components/feed_page.dart';
+import 'components/my_feed_page.dart';
 
-class NewsPage extends StatelessWidget {
-  const NewsPage({super.key});
+
+class NewsPage extends StatefulWidget {
+  NewsPage({super.key});
+
+  @override
+  State<NewsPage> createState() => _NewsPageState();
+}
+
+class _NewsPageState extends State<NewsPage> {
+  int currentIndex = 0;
+
+  List newsPages = [
+    const FeedPage(),
+    const MyFeedPage(),
+    const ApprovalsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: const PreferredSize(
-              preferredSize: Size.fromHeight(kToolbarHeight),
-              child: SizedBox(
-                  height: 50,
-                  child: Material(
-                    color: AppColors.textFieldColor,
-                    child: TabBar(
-                        indicatorColor: AppColors.indicatorColor,
-                        labelColor: AppColors.indicatorColor,
-                        unselectedLabelColor: AppColors.colorWhite,
-                        tabs: [
-                          TextWidget(
-                            txt: AppStrings.feedsTxt,
-                          ),
-                          TextWidget(
-                            txt: AppStrings.myFeedsTxt,
-                          ),
-                          TextWidget(
-                            txt: AppStrings.approvelTxt,
-                          ),
-                        ]),
-                  ))),
-                  floatingActionButton: const FloatingButtonWidget(),
-          body: Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppImages.imgBackground),
-                    fit: BoxFit.cover)),
-                    child: const Center(child: Text('hello',style: TextStyle(backgroundColor: AppColors.colorWhite),))),
+    return Scaffold(
+      backgroundColor: AppColors.backGroundColor,
+        floatingActionButton: const FloatingButtonWidget(),
+        body: SizedBox(
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            children: [
+              TabBarWidget(index: currentIndex, selectedIndex: selectedPage),
+              Flexible(
+                child: Container(
+                  decoration:const BoxDecoration(image: DecorationImage(image: AssetImage(AppImages.imgBackground,),fit: BoxFit.cover)),
+                child: newsPages[currentIndex],),
+              )
+            ],
           ),
-        );
+        ));
+  }
+
+  void selectedPage(index) {
+    setState(() {
+      currentIndex=index;
+    });
   }
 }

@@ -6,7 +6,7 @@ import '../../widgets/text_widget.dart';
 import './components/list_tile_widget.dart';
 import '../../consts/app_img_strings.dart';
 import '../../consts/app_text_strings.dart';
-import '../../widgets/gradient.dart';
+import '../gradients/icon_label_gradient.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
