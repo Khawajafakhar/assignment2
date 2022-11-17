@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppImages {
   static const onBoard1 = 'assets/images/imgOnBoard1.png';
   static const onBoard2 = 'assets/images/imgOnBoard2.png';
@@ -9,4 +11,14 @@ class AppImages {
   static const imgIconTwitter = 'assets/images/imgIconTwitter.png';
   static const imgIconUser = 'assets/images/imgIconUser.png';
   static const imgBackground = 'assets/images/imgBackground.png';
+  static const imgProfile = 'assets/images/imgProfile.png';
+
+  static final drawerImgList = [
+    Image.asset('assets/images/imgIconUser.png'),
+    Image.asset('assets/images/imgPredictIcon.png'),
+    Image.asset('assets/images/imgFaqIcon.png'),
+    Image.asset('assets/images/imgPrivacyIcon.png'),
+    Image.asset('assets/images/imgTermIcon.png'),
+    Image.asset('assets/images/imgAdminIcon.png'),
+  ];
 }

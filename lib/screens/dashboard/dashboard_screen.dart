@@ -6,6 +6,7 @@ import 'bottom_Navigation_pages/home_page.dart';
 import 'bottom_Navigation_pages/leader_page.dart';
 import 'bottom_Navigation_pages/news_page/news_page.dart';
 import 'bottom_Navigation_pages/settings_page.dart';
+import '../../widgets/drawer/drawer_widget.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = 'dashboard-screen';
@@ -39,7 +40,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
           islogo: true,
         ),
-        drawer:const Drawer(),
+        drawer:const DrawerWidget(),
         bottomNavigationBar: BottomAppBarWidget(
           index: index,value: changePage,
         ),
