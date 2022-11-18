@@ -84,6 +84,7 @@ class AddNewsScreen extends StatelessWidget {
                       inputAction: TextInputAction.none,
                       fillColor: AppColors.backGroundColor,
                       hint: AppStrings.searchTxt,
+                      borderSideColor: AppColors.colorWhite,
                       suffix: const Icon(
                         Icons.search_outlined,
                         color: AppColors.colorWhite,

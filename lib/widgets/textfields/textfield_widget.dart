@@ -24,6 +24,7 @@ class TextFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.maxLines = 1,
+    this.borderSideColor=AppColors.textFieldColor
   }) : super(key: key);
 
   final String? hint;
@@ -45,6 +46,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool? readOnly;
   final VoidCallback? onTap;
   final int? maxLines;
+  final Color borderSideColor;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class TextFieldWidget extends StatelessWidget {
             fontFamily: Fonts.openSansReg,
             fontWeight: FontWeight.w400,
           ),
-          errorStyle: const TextStyle(color: Colors.red),
+          errorStyle: const TextStyle(color: AppColors.colorRed),
           border: InputBorder.none,
           focusedBorder: focusedBorder,
           enabledBorder: enabledBorder,
@@ -98,11 +100,11 @@ class TextFieldWidget extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder get enabledBorder =>const OutlineInputBorder(
+  OutlineInputBorder get enabledBorder => OutlineInputBorder(
     borderSide: BorderSide(
-      color: AppColors.textFieldColor
+      color: borderSideColor
     ),
-        borderRadius:  BorderRadius.all(Radius.circular(10.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
       );
 
   OutlineInputBorder get disabledBorder => const OutlineInputBorder(
@@ -111,14 +113,14 @@ class TextFieldWidget extends StatelessWidget {
 
   OutlineInputBorder get focusedBorder => const OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppColors.inActiveDotColor,
+          color: AppColors.textFieldColor,
           width: 1,
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       );
   OutlineInputBorder get errorBorder => const OutlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.red,
+          color: AppColors.colorRed,
           width: 1,
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -126,7 +128,7 @@ class TextFieldWidget extends StatelessWidget {
 
   OutlineInputBorder get focusedErrorBorder => const OutlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.red,
+          color: AppColors.colorRed,
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       );

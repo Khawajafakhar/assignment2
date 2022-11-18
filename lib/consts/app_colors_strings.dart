@@ -11,6 +11,8 @@ class AppColors {
   static const indicatorColor = Color(0xFFF8485E);
   static const colorpinkish = Color(0xFFF8485E);
   static const colorReddidh = Color(0xFFF8495E);
+    static const colorRed = Color(0xFFFF0000);
+
 
   static const pinkishGradient = LinearGradient(
     colors: [
