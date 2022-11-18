@@ -12,6 +12,9 @@ class AppImages {
   static const imgIconUser = 'assets/images/imgIconUser.png';
   static const imgBackground = 'assets/images/imgBackground.png';
   static const imgProfile = 'assets/images/imgProfile.png';
+  static const imgLeagLogo1 = 'assets/images/imgLeagLogo1.png';
+  static const imgLeagLogo2 = 'assets/images/imgLeagLogo2.png';
+  static const imgLeagLogo3 = 'assets/images/imgLeagLogo3.png';
 
   static final drawerImgList = [
     Image.asset('assets/images/imgIconUser.png'),

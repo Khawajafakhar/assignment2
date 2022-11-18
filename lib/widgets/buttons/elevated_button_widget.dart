@@ -23,33 +23,31 @@ class ButtonWidget extends StatelessWidget {
     return Container(
         width: double.infinity,
         alignment: Alignment.center,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-              width: width,
-              height: height,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  gradient: const LinearGradient(colors: [
-                    Color(0xFFF67599),
-                    Color(0xFFE31C79),
-                    Color(0xFF8F2291),
-                    Color(0xFF5F259F),
-                  ])),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  padding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                ),
-                onPressed: onPressed,
-                child: TextWidget(
-                  txt: txt,
-                  color: AppColors.txtColorWhite,
-                  fontSize: fontSize,
-                ),
-              )),
-        ));
+        child: Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                gradient: const LinearGradient(colors: [
+                  Color(0xFFF67599),
+                  Color(0xFFE31C79),
+                  Color(0xFF8F2291),
+                  Color(0xFF5F259F),
+                ])),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: EdgeInsets.zero,
+                
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+              ),
+              onPressed: onPressed,
+              child: TextWidget(
+                txt: txt,
+                color: AppColors.txtColorWhite,
+                fontSize: fontSize,
+              ),
+            )));
   }
 }

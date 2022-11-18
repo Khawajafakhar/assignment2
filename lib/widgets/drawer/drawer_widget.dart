@@ -7,6 +7,7 @@ import './components/list_tile_widget.dart';
 import '../../consts/app_img_strings.dart';
 import '../../consts/app_text_strings.dart';
 import '../gradients/icon_label_gradient.dart';
+import '../../consts/app_widgets.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -42,7 +43,7 @@ class DrawerWidget extends StatelessWidget {
                   itemCount: 6,
                   itemBuilder: (context, index) => DrawerListTileWidget(
                     leading: AppImages.drawerImgList[index],
-                    title: AppStrings.drawertxtList[index],
+                    title: AppWidgets.drawertxtList[index],
                   ),
                 ),
               ),

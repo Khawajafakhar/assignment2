@@ -1,5 +1,3 @@
-import '../widgets/text_widget.dart';
-import './app_colors_strings.dart';
 
 class AppStrings {
   static const onBoardTxt1 = 'LOREM IPSUM DOLOR';
@@ -39,37 +37,20 @@ class AppStrings {
   static const leaderTxt = 'Leader';
   static const newsTxt = 'News';
   static const settingsTxt = 'Settings';
+
+  //Temperory hard coded
   static const logOutTxt = 'Logout';
+  static const fifaMatchTxt = 'FIFA Matches';
+  static const premierLeagTxt = 'Premier League';
+  static const uefaleagTxt = 'UEFA Champion League';
+  static const engMatchTxt = 'ENG-GR';
+  static const chlMatchTxt = 'CHL-ARS';
+  static const ufcmatchTxt = 'UFC-ARS';
 
   static const feedsTxt = 'FEEDS';
   static const myFeedsTxt = 'MY FEEDS';
   static const approvelTxt = 'APPROVALS';
-  static const drawertxtList = [
-    TextWidget(
-      txt: 'Profile',
-      color: AppColors.colorWhite,
-    ),
-    TextWidget(
-      txt: 'My Predictions',
-      color: AppColors.colorWhite,
-    ),
-    TextWidget(
-      txt: 'FAQs',
-      color: AppColors.colorWhite,
-    ),
-    TextWidget(
-      txt: 'Privacy Policy',
-      color: AppColors.colorWhite,
-    ),
-    TextWidget(
-      txt: 'Terms of Services',
-      color: AppColors.colorWhite,
-    ),
-    TextWidget(
-      txt: 'Admin',
-      color: AppColors.colorWhite,
-    ),
-  ];
+ 
 
   static const tabBarItems = ['FEED', 'MY FEED', 'APPROVALS'];
 }

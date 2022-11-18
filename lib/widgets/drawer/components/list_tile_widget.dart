@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../consts/app_colors_strings.dart';
 
 class DrawerListTileWidget extends StatelessWidget {
   const DrawerListTileWidget(
