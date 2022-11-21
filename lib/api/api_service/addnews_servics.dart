@@ -1,7 +1,5 @@
-import 'dart:io';
 
 import 'package:assigment2/api/models/signup_response_model.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -43,11 +41,9 @@ try {   final url = Uri.parse(ApiStrings.addNewsUrl);
         },
         body: mapData);
     if (response.statusCode == 201 || response.statusCode == 200) {
-      final decodedResponse = json.decode(response.body);
-      print(decodedResponse);
       return true;
     } else {
-      print(json.decode(response.body));
+      error=json.decode(response.body);
       return false;
     }}catch(error){
       rethrow;
