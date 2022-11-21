@@ -11,8 +11,7 @@ class AppColors {
   static const indicatorColor = Color(0xFFF8485E);
   static const colorpinkish = Color(0xFFF8485E);
   static const colorReddidh = Color(0xFFF8495E);
-    static const colorRed = Color(0xFFFF0000);
-
+  static const colorRed = Color(0xFFFF0000);
 
   static const pinkishGradient = LinearGradient(
     colors: [
@@ -31,13 +30,22 @@ class AppColors {
     Color(0xFFF8485E),
   ]);
   static const blackishGradient = LinearGradient(
-      colors: [Color(0xFF28314A), Color(0xFF1B1F2A), Color(0XFF1B1F2A)],
-      end: Alignment.bottomLeft,
-      tileMode: TileMode.mirror);
-  static const yellowishGradient2 = LinearGradient(colors: [
-    Color(0xFFFFE7C3),
-    Color(0xFFFFB36E),
-    Color(0xFFF8485E),
-    Color(0xFFFF0726),
-  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+    colors: [
+      Color(0xFF28314A),
+      Color(0xFF1B1F2A),
+      Color(0XFF1B1F2A),
+    ],
+    end: Alignment.bottomLeft,
+    tileMode: TileMode.mirror,
+  );
+  static const yellowishGradient2 = LinearGradient(
+    colors: [
+      Color(0xFFFFE7C3),
+      Color(0xFFFFB36E),
+      Color(0xFFF8485E),
+      Color(0xFFFF0726),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }

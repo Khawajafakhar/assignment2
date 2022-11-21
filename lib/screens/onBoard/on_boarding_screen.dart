@@ -16,7 +16,7 @@ class OnBoardingScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.backGroundColor,
         body: ConstrainedBox(
           constraints: const BoxConstraints(

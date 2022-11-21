@@ -10,16 +10,21 @@ class OnBoardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image.asset(
-          image!,
-          fit: BoxFit.cover,
+        SizedBox(
+          width: double.infinity,
+          height: size.height*0.65,
+          child: Image.asset(
+            image!,
+            fit: BoxFit.fill,
+          ),
         ),
         Container(
-          width: 250,
-          height: 120,
+          width: double.infinity,
+          height: size.height*0.15,
          // color: AppColors.activeDotColor,
           alignment: Alignment.topCenter,
          // decoration: const BoxDecoration(color: AppColors.activeDotColor),

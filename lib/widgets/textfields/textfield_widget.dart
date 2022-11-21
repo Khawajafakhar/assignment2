@@ -3,7 +3,7 @@ import '../../consts/app_colors_strings.dart';
 import '../../consts/fonts.dart';
 
 class TextFieldWidget extends StatelessWidget {
-   const TextFieldWidget({
+  const TextFieldWidget({
     Key? key,
     required this.textController,
     this.inputType,
@@ -11,7 +11,7 @@ class TextFieldWidget extends StatelessWidget {
     this.isObscure = false,
     this.padding = const EdgeInsets.all(0),
     this.hintColor = AppColors.txtColorWhite,
-    this.fillColor=AppColors.textFieldColor,
+    this.fillColor = AppColors.textFieldColor,
     this.focusNode,
     this.onFieldSubmitted,
     this.onChanged,
@@ -24,7 +24,8 @@ class TextFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.maxLines = 1,
-    this.borderSideColor=AppColors.textFieldColor
+    this.borderSideColor = AppColors.textFieldColor,
+    this.onSave
   }) : super(key: key);
 
   final String? hint;
@@ -47,10 +48,12 @@ class TextFieldWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final int? maxLines;
   final Color borderSideColor;
+  final void Function(String?)? onSave;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onSaved: onSave,
       controller: textController,
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
@@ -101,9 +104,7 @@ class TextFieldWidget extends StatelessWidget {
   }
 
   OutlineInputBorder get enabledBorder => OutlineInputBorder(
-    borderSide: BorderSide(
-      color: borderSideColor
-    ),
+        borderSide: BorderSide(color: borderSideColor),
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
       );
 

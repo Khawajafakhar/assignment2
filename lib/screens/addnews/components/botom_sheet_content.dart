@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../consts/app_colors_strings.dart';
 import '../../../consts/ui_helper.dart';
-import '../../../consts/app_widgets.dart';
 import './list_tile_widget.dart';
 import './check_box_widget.dart';
+import '../../../api/provider/selectmatch_provider.dart';
+import 'package:provider/provider.dart';
 
 class BottomSheetContent extends StatelessWidget {
   const BottomSheetContent({
@@ -13,6 +14,7 @@ class BottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final matches= Provider.of<SelectMatchProvider>(context,listen: false);
     Size size=MediaQuery.of(context).size;
     return Container(
       height: size.height*0.5,
@@ -36,14 +38,14 @@ class BottomSheetContent extends StatelessWidget {
             UiHelper.verticalSmall1,
             Expanded(
                 child: ListView.builder(
-              itemCount: AppWidgets.avatar.length,
-              itemBuilder: (context, index) => ListTileWidget(
-                leading: AppWidgets.avatar[index],
-                title: AppWidgets.titleList[index],
-                subTitle: AppWidgets.subTitleList[index],
-                trailing: const CheckBoxWidget(),
+              itemCount: matches.matchesList.length,
+              itemBuilder: (context, index) { return ListTileWidget(
+                leading: matches.matchesList[index].leagImg,
+                title: matches.matchesList[index].leagTitle,
+                subTitle: matches.matchesList[index].matchTitle,
+                trailing:  CheckBoxWidget(matchId: matches.matchesList[index].matchId),
                 
-              ),
+              );}
             ))
           ],
         ),
