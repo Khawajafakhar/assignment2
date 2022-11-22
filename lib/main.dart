@@ -43,9 +43,9 @@ class MyApp extends StatelessWidget {
           ),
           home: OnBoardingScreen(),
           routes: {
-            SignInScreen.routeName: (context) => SignInScreen(),
+            SignInScreen.routeName: (context) =>const SignInScreen(),
             SignUpScreen.routename: (context) => const SignUpScreen(),
-            ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+            ForgotPasswordScreen.routeName: (context) =>const ForgotPasswordScreen(),
             ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
             DashBoardScreen.routeName: (context) => const DashBoardScreen(),
             AddNewsScreen.routeName: (context) =>const AddNewsScreen(),

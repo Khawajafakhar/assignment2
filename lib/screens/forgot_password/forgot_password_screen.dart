@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../consts/app_text_strings.dart';
 import '../../consts/app_colors_strings.dart';
@@ -11,13 +12,27 @@ import '../../widgets/buttons/elevated_button_widget.dart';
 import '../../widgets/rich_text_widget.dart';
 import '../../screens/resetpassword/reset_pass_screen.dart';
 import '../signup/sign_up_screen.dart';
+import '../../validation/loc_validation.dart';
+import 'package:provider/provider.dart';
+import '../../api/api_service/auth_service.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   static const routeName = 'forgot-pass-screen';
-  ForgotPasswordScreen({super.key});
+  const ForgotPasswordScreen({super.key});
+
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController emailcont = TextEditingController();
+
   final GlobalKey<FormState> resetFormKey = GlobalKey();
+
   BuildContext? ctx;
+  bool isLoading = false;
+  String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -27,53 +42,87 @@ class ForgotPasswordScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.backGroundColor,
           appBar: const AppBarWidget(txt: AppStrings.txtForgotPass),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                children: [
-                  UiHelper.verticalMedium,
-                  const AppLogoWidget(),
-                  UiHelper.verticalSmall1,
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: TextWidget(
-                      txt: AppStrings.txtForgotScreen,
-                      textAlign: TextAlign.center,
-                      color: AppColors.colorWhite,
+          body: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Column(
+                      children: [
+                        UiHelper.verticalMedium,
+                        const AppLogoWidget(),
+                        UiHelper.verticalSmall1,
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.0),
+                          child: TextWidget(
+                            txt: AppStrings.txtForgotScreen,
+                            textAlign: TextAlign.center,
+                            color: AppColors.colorWhite,
+                          ),
+                        ),
+                        UiHelper.verticalSmall1,
+                        Form(
+                            key: resetFormKey,
+                            child: TextFieldWidget(
+                              textController: emailcont,
+                              prefix: Image.asset(AppImages.imgEmailIcon),
+                              hint: AppStrings.hintTxtEmailOrPhone,
+                              validator: (val) =>
+                                  Validation.isEmailValid(val!),
+                            )),
+                        UiHelper.verticalSmall1,
+                        ButtonWidget(
+                          height: 40,
+                          width: double.infinity,
+                          txt: AppStrings.txtResetPass,
+                          fontSize: 18,
+                          onPressed: onResetPassPressed,
+                        ),
+                        UiHelper.verticalLarge,
+                        RichTextWidget(
+                          txt: AppStrings.txtNewAcc,
+                          txt2: AppStrings.txtSignUp,
+                          onPressed: onSignUpPressed,
+                        ),
+                      ],
                     ),
                   ),
-                  UiHelper.verticalSmall1,
-                  Form(
-                      key: resetFormKey,
-                      child: TextFieldWidget(
-                        textController: emailcont,
-                        prefix: Image.asset(AppImages.imgEmailIcon),
-                        hint: AppStrings.hintTxtEmailOrPhone,
-                      )),
-                  UiHelper.verticalSmall1,
-                  ButtonWidget(
-                    height: 40,
-                    width: double.infinity,
-                    txt: AppStrings.txtResetPass,
-                    fontSize: 18,
-                    onPressed: onResetPassPressed,
-                  ),
-                  UiHelper.verticalLarge,
-                  RichTextWidget(
-                    txt: AppStrings.txtNewAcc,
-                    txt2: AppStrings.txtSignUp,
-                    onPressed: onSignUpPressed,
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
         ));
   }
 
-  void onResetPassPressed() {
-    Navigator.of(ctx!).pushNamed(ResetPasswordScreen.routeName);
+  void onResetPassPressed() async {
+    if (resetFormKey.currentState!.validate()) {
+      setState(() {
+        isLoading = !isLoading;
+      });
+      email = emailcont.text;
+      final auth = Provider.of<AuthApiService>(ctx!,listen: false);
+      await auth.forgotPassword(email!).then((response) {
+        if (response == true) {
+          setState(() {
+            isLoading = !isLoading;
+          });
+          Fluttertoast.showToast(
+                  msg: auth.restResponse.toString(),
+                  toastLength: Toast.LENGTH_LONG,
+                  textColor: AppColors.colorWhite)
+              .then((_) {
+            Navigator.of(ctx!).pushNamed(ResetPasswordScreen.routeName);
+          });
+        } else {
+          setState(() {
+            isLoading = !isLoading;
+          });
+          Fluttertoast.showToast(
+              msg: auth.error.toString(),
+              toastLength: Toast.LENGTH_LONG,
+              textColor: AppColors.colorWhite);
+        }
+      });
+    }
   }
 
   void onSignUpPressed() {

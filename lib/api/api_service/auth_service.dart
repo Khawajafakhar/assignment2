@@ -10,6 +10,7 @@ import '../models/signIn_model.dart';
 class AuthApiService with ChangeNotifier {
   String? _token;
   List<dynamic>? error;
+  Map<String,dynamic>? restResponse;
 
   bool get isAuth {
     return _token != null;
@@ -22,14 +23,15 @@ class AuthApiService with ChangeNotifier {
     return null;
   }
 
-  Future<bool> auth({required Map<String,String?> data,required String urlPart}) async {
-  
-  try{ final url = Uri.parse("http://54.197.94.1/api/v1/$urlPart/");
-    
+  Future<bool> auth(
+      {required Map<String, String?> data, required String urlPart}) async {
+    try {
+      final url = Uri.parse("http://54.197.94.1/api/v1/$urlPart/");
+
       final response = await http.post(url, body: data);
       if (response.statusCode >= 400) {
         final decodedResponse = json.decode(response.body);
-        error=decodedResponse["error_log"];
+        error = decodedResponse["error_log"];
         return false;
       } else {
         final decodedResponse = json.decode(response.body);
@@ -40,27 +42,46 @@ class AuthApiService with ChangeNotifier {
         final prefs = await SharedPreferences.getInstance();
         prefs.setString('signUpResponse', jsonString);
         return true;
-      }}catch(error){
-        rethrow;
       }
+    } catch (error) {
+      rethrow;
+    }
   }
-  Future<bool> signUp(SignUpData data) async{
-   var mapData= {
-        "user[email]": data.email,
-        "user[first_name]": data.firstName,
-        "user[last_name]": data.lastname,
-        "user[password]": data.pass,
-        "user[password_confirmation]": data.cnfrmPass
-      };
 
-    return auth(data:mapData,urlPart:'users');
+  Future<bool> signUp(SignUpData data) async {
+    var mapData = {
+      "user[email]": data.email,
+      "user[first_name]": data.firstName,
+      "user[last_name]": data.lastname,
+      "user[password]": data.pass,
+      "user[password_confirmation]": data.cnfrmPass
+    };
+
+    return auth(data: mapData, urlPart: 'users');
   }
-   Future<bool> logIn(SignInData data) async{
-   var mapData= {
-        "email": data.email,
-        "password": data.pass,
-      };
 
-    return auth(data:mapData,urlPart: 'sessions');
+  Future<bool> logIn(SignInData data) async {
+    var mapData = {
+      "email": data.email,
+      "password": data.pass,
+    };
+
+    return auth(data: mapData, urlPart: 'sessions');
+  }
+
+  Future<bool> forgotPassword(String email) async {
+    try {
+      final url = Uri.parse(ApiStrings.forgotPassUrl);
+      final response = await http.put(url, body: {"email": email});
+      if (response.statusCode >= 400) {
+        error = jsonDecode(response.body);
+        return false;
+      } else {
+        restResponse=jsonDecode(response.body);
+        return true;
+      }
+    } catch (error) {
+      rethrow;
+    }
   }
 }
