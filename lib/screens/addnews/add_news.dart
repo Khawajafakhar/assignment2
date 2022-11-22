@@ -9,6 +9,7 @@ import './components/botom_sheet_content.dart';
 import 'package:provider/provider.dart';
 import '../../api/api_service/addnews_servics.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../api/api_service/get_allnews_service.dart';
 
 class AddNewsScreen extends StatefulWidget {
   static const routeName = 'add-news-screen';
@@ -141,13 +142,12 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
     setState(() {
       isLoading = !isLoading;
     });
-    final addNews = Provider.of<AddNewsService>(context, listen: false);
+    final addNews = Provider.of<AddNewsService>(ctx!, listen: false);
     try {
       final response = await addNews.addNews(
           title: title, discription: discription, matchId: matchId);
       if (response == true) {
-        Navigator.of(ctx!).pop();
-       
+        getDataAndPop();
       } else {
         Fluttertoast.showToast(
             msg: addNews.error.toString(),
@@ -163,5 +163,27 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
     setState(() {
       isLoading = !isLoading;
     });
+  }
+
+  void getDataAndPop() async {
+    final getAllNews = Provider.of<GetAllNewsService>(ctx!, listen: false);
+    try {
+      await getAllNews.getAllNews().then((response) {
+        if (response == true) {
+          Navigator.of(ctx!).pop();
+        } else {
+          Fluttertoast.showToast(
+              msg: getAllNews.error!,
+              toastLength: Toast.LENGTH_LONG,
+              textColor: AppColors.colorWhite);
+        }
+      });
+    } catch (error) {
+      print(error);
+      Fluttertoast.showToast(
+          msg: error.toString(),
+          toastLength: Toast.LENGTH_LONG,
+          textColor: AppColors.colorWhite);
+    }
   }
 }

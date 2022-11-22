@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'api/api_service/auth_service.dart';
 import './api/provider/selectmatch_provider.dart';
 import './api/api_service/addnews_servics.dart';
+import './api/api_service/get_allnews_service.dart';
+import './api/provider/news_provider.dart';
 
 
 void main() {
@@ -28,6 +30,10 @@ class MyApp extends StatelessWidget {
         create: (context) => SelectMatchProvider()),
         ChangeNotifierProvider(
         create: (context) => AddNewsService()),
+        ChangeNotifierProvider(
+        create: (context) => GetAllNewsService()),
+        ChangeNotifierProvider(
+        create: (context) => NewsProvider()),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
@@ -41,7 +47,7 @@ class MyApp extends StatelessWidget {
             ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
             ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
             DashBoardScreen.routeName: (context) => const DashBoardScreen(),
-            AddNewsScreen.routeName: (context) => AddNewsScreen()
+            AddNewsScreen.routeName: (context) =>const AddNewsScreen()
           },
         ),
       );
