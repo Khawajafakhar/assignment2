@@ -7,10 +7,8 @@ import '../../consts/ui_helper.dart';
 import '../../widgets/textfields/textfield_widget.dart';
 import '../../widgets/text_widget.dart';
 import './components/botom_sheet_content.dart';
-import 'package:provider/provider.dart';
 import '../../api/api_service/addnews_servics.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../api/api_service/get_allnews_service.dart';
 
 class AddNewsScreen extends StatefulWidget {
   static const routeName = 'add-news-screen';
@@ -143,12 +141,11 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
     setState(() {
       isLoading = !isLoading;
     });
-    final addNews = Provider.of<AddNewsService>(ctx!, listen: false);
     try {
-      final response = await addNews.addNews(
+      final response = await AddNewsService.addNews(
           title: title, discription: discription, matchId: matchId);
       if (response == true) {
-        Navigator.of(ctx!).pop();
+          Navigator.of(ctx!).pushReplacementNamed(DashBoardScreen.routeName);
         setState(() {
           isLoading = !isLoading;
         });
@@ -157,7 +154,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
           isLoading = !isLoading;
         });
         Fluttertoast.showToast(
-            msg: addNews.error.toString(),
+            msg: 'Unable to add news',
             toastLength: Toast.LENGTH_LONG,
             textColor: AppColors.colorWhite);
       }
@@ -172,24 +169,4 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
     }
   }
 
-  void getDataAndPop() async {
-    final getAllNews = Provider.of<GetAllNewsService>(ctx!, listen: false);
-    try {
-      await getAllNews.getAllNews().then((response) {
-        if (response == true) {
-          Navigator.of(ctx!).pushReplacementNamed(DashBoardScreen.routeName);
-        } else {
-          Fluttertoast.showToast(
-              msg: getAllNews.error!,
-              toastLength: Toast.LENGTH_LONG,
-              textColor: AppColors.colorWhite);
-        }
-      });
-    } catch (error) {
-      Fluttertoast.showToast(
-          msg: error.toString(),
-          toastLength: Toast.LENGTH_LONG,
-          textColor: AppColors.colorWhite);
-    }
-  }
 }

@@ -1,15 +1,11 @@
 import 'package:assigment2/api/models/signup_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../consts/api_strings.dart';
 
-class AddNewsService with ChangeNotifier {
-  dynamic uid;
-  String? token;
-  var error;
-  Future<bool> addNews(
+class AddNewsService {
+  static Future<bool> addNews(
       {required String? title,
       required String? discription,
       required matchId}) async {
@@ -20,18 +16,15 @@ class AddNewsService with ChangeNotifier {
     final prefsData =
         jsonDecode(prefs.getString('signUpResponse')!) as Map<String, dynamic>;
     SignUpResponse userdata = SignUpResponse.fromJson(prefsData);
-    uid = userdata.id;
 
     final mapData = jsonEncode({
       "news": {
-        
-          "title": title,
-          "description": discription,
-          "user_id": uid,
-          "league_id": 39,
-          "match_id": matchId
-        }
-      
+        "title": title,
+        "description": discription,
+        "user_id": userdata.id,
+        "league_id": 39,
+        "match_id": matchId
+      }
     });
 
     try {
@@ -46,7 +39,6 @@ class AddNewsService with ChangeNotifier {
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
       } else {
-        error = json.decode(response.body);
         return false;
       }
     } catch (error) {

@@ -16,7 +16,7 @@ import '../forgot_password/forgot_password_screen.dart';
 import '../dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 import '../../api/api_service/auth_service.dart';
-import '../../api/models/signIn_model.dart';
+import '../../api/models/signin_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../validation/loc_validation.dart';
 
@@ -73,6 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   hint: AppStrings.hintTxtEmail,
                                   prefix: Image.asset(AppImages.imgEmailIcon),
                                   inputAction: TextInputAction.next,
+                                  inputType: TextInputType.emailAddress,
                                   validator: (value) =>
                                       Validation.isEmailValid(value!),
                                   onSave: (value) => data.email = value,
@@ -81,6 +82,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 PasswordTextField(
                                   controller: passController,
                                   hint: AppStrings.hintTxtPass,
+                                  inputAction: TextInputAction.done,
+                                  inputType: TextInputType.visiblePassword,
                                   validator: (value) =>
                                       Validation.isPasswordValid(value!),
                                   onSave: (value) => data.pass = value,
@@ -130,8 +133,7 @@ class _SignInScreenState extends State<SignInScreen> {
       });
       formKey.currentState!.save();
       try {
-        final auth = Provider.of<AuthApiService>(context, listen: false);
-        final response = await auth.logIn(data);
+        final response = await AuthApiService.logIn(data);
         if (response == true) {
           await Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName);
           setState(() {
@@ -142,7 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
             isLoading = !isLoading;
           });
           Fluttertoast.showToast(
-              msg: auth.error.toString(),
+              msg: 'Unable to login',
               toastLength: Toast.LENGTH_LONG,
               textColor: AppColors.colorWhite);
         }

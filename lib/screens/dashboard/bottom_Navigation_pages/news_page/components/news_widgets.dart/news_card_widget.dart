@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../consts/app_colors_strings.dart';
 import './feed_img_widget.dart';
 import '../../../../../../widgets/text_widget.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget({
@@ -56,11 +57,11 @@ class NewsCardWidget extends StatelessWidget {
                             children:  [
                               TextWidget(
                                 txt: '$firstName $lastName',
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: AppColors.colorWhite,
                               ),
                               TextWidget(
-                                txt: createdAt,
+                                txt: timeago.format(DateTime.parse(createdAt!)),
                                 fontSize: 12,
                                 color: AppColors.richTextBtnColor,
                               )

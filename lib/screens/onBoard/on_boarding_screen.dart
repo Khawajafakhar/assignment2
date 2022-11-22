@@ -26,20 +26,20 @@ class OnBoardingScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
-                height: size.height * 0.8,
+                height: size.height * 0.75,
                 child: PageViewWidget(controller: controller),
               ),
-              SizedBox(
-                height: size.height * 0.05,
+              Expanded(
                 child: PageIndicatorWidget(controller: controller),
               ),
-              SizedBox(
-                height: size.height * 0.1,
-                child: ButtonWidget(
-                  height: size.height*0.05,
-                  width: 220,
-                  txt: AppStrings.btnTxtGetStarted,
-                  onPressed: getStartedButton,
+              Expanded(
+                child: Center(
+                  child: ButtonWidget(
+                    height: size.height * 0.05,
+                    width: 220,
+                    txt: AppStrings.btnTxtGetStarted,
+                    onPressed: getStartedButton,
+                  ),
                 ),
               ),
             ],

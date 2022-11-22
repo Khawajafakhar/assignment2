@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../consts/app_text_strings.dart';
 import '../../consts/app_colors_strings.dart';
@@ -13,7 +12,6 @@ import '../../widgets/rich_text_widget.dart';
 import '../../screens/resetpassword/reset_pass_screen.dart';
 import '../signup/sign_up_screen.dart';
 import '../../validation/loc_validation.dart';
-import 'package:provider/provider.dart';
 import '../../api/api_service/auth_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -69,8 +67,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               textController: emailcont,
                               prefix: Image.asset(AppImages.imgEmailIcon),
                               hint: AppStrings.hintTxtEmailOrPhone,
-                              validator: (val) =>
-                                  Validation.isEmailValid(val!),
+                              validator: (val) => Validation.isEmailValid(val!),
                             )),
                         UiHelper.verticalSmall1,
                         ButtonWidget(
@@ -99,25 +96,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         isLoading = !isLoading;
       });
       email = emailcont.text;
-      final auth = Provider.of<AuthApiService>(ctx!,listen: false);
-      await auth.forgotPassword(email!).then((response) {
+      await AuthApiService.forgotPassword(email!).then((response) {
         if (response == true) {
           setState(() {
             isLoading = !isLoading;
           });
-          Fluttertoast.showToast(
-                  msg: auth.restResponse.toString(),
-                  toastLength: Toast.LENGTH_LONG,
-                  textColor: AppColors.colorWhite)
-              .then((_) {
-            Navigator.of(ctx!).pushNamed(ResetPasswordScreen.routeName);
-          });
+
+          Navigator.of(ctx!).pushNamed(ResetPasswordScreen.routeName);
         } else {
           setState(() {
             isLoading = !isLoading;
           });
           Fluttertoast.showToast(
-              msg: auth.error.toString(),
+              msg: 'Unable to reset pass',
               toastLength: Toast.LENGTH_LONG,
               textColor: AppColors.colorWhite);
         }

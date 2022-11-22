@@ -1,41 +1,26 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:assigment2/consts/app_colors_strings.dart';
 import 'package:http/http.dart' as http;
 import '../models/signup_model.dart';
 import '../../consts/api_strings.dart';
 import '../models/signup_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/signIn_model.dart';
+import '../models/signin_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class AuthApiService with ChangeNotifier {
-  String? _token;
-  List<dynamic>? error;
-  Map<String,dynamic>? restResponse;
+class AuthApiService {
+  static Map<String, dynamic>? restResponse;
 
-  bool get isAuth {
-    return _token != null;
-  }
-
-  String? get token {
-    if (_token != null) {
-      return _token;
-    }
-    return null;
-  }
-
-  Future<bool> auth(
+  static Future<bool> auth(
       {required Map<String, String?> data, required String urlPart}) async {
     try {
       final url = Uri.parse("http://54.197.94.1/api/v1/$urlPart/");
 
       final response = await http.post(url, body: data);
       if (response.statusCode >= 400) {
-        final decodedResponse = json.decode(response.body);
-        error = decodedResponse["error_log"];
         return false;
       } else {
         final decodedResponse = json.decode(response.body);
-        _token = decodedResponse["api_token"];
         SignUpResponse responseData = SignUpResponse.fromJson(decodedResponse);
         Map<String, dynamic> userData = responseData.toJson();
         String jsonString = jsonEncode(userData);
@@ -48,7 +33,7 @@ class AuthApiService with ChangeNotifier {
     }
   }
 
-  Future<bool> signUp(SignUpData data) async {
+  static Future<bool> signUp(SignUpData data) async {
     var mapData = {
       "user[email]": data.email,
       "user[first_name]": data.firstName,
@@ -60,7 +45,7 @@ class AuthApiService with ChangeNotifier {
     return auth(data: mapData, urlPart: 'users');
   }
 
-  Future<bool> logIn(SignInData data) async {
+  static Future<bool> logIn(SignInData data) async {
     var mapData = {
       "email": data.email,
       "password": data.pass,
@@ -69,19 +54,38 @@ class AuthApiService with ChangeNotifier {
     return auth(data: mapData, urlPart: 'sessions');
   }
 
-  Future<bool> forgotPassword(String email) async {
+  static Future<bool> forgotPassword(String email) async {
     try {
       final url = Uri.parse(ApiStrings.forgotPassUrl);
       final response = await http.put(url, body: {"email": email});
       if (response.statusCode >= 400) {
-        error = jsonDecode(response.body);
+       
         return false;
       } else {
-        restResponse=jsonDecode(response.body);
+        restResponse = jsonDecode(response.body);
+         Fluttertoast.showToast(
+          msg: jsonDecode(response.body).toString(),
+          toastLength: Toast.LENGTH_LONG,
+          textColor: AppColors.colorWhite,
+        );
         return true;
       }
     } catch (error) {
       rethrow;
     }
+  }
+  static Future<void> logOut()async{
+  final prefs = await SharedPreferences.getInstance();
+  prefs.clear();
+  }
+ static Future<bool> tryAutoLogin()async{
+    final prefs = await SharedPreferences.getInstance();
+    if(!prefs.containsKey('signUpResponse')){
+      return false;
+    }
+    else{
+      return true;
+    }
+
   }
 }

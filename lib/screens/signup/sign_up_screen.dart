@@ -14,7 +14,6 @@ import '../../api/models/signup_model.dart';
 import '../../validation/loc_validation.dart';
 import '../../api/api_service/auth_service.dart';
 import '../dashboard/dashboard_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -86,6 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 inputAction: TextInputAction.next,
                                 hint: AppStrings.hintTxtName,
                                 prefix: Image.asset(AppImages.imgIconUser),
+                                inputType: TextInputType.text,
                               ),
                               UiHelper.verticalXSmall,
                               TextFieldWidget(
@@ -100,6 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 inputAction: TextInputAction.next,
                                 hint: AppStrings.hintTxtEmail,
                                 prefix: Image.asset(AppImages.imgEmailIcon),
+                                inputType: TextInputType.emailAddress,
                               ),
                               UiHelper.verticalXSmall,
                               PasswordTextField(
@@ -113,6 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 controller: passController,
                                 hint: AppStrings.hintTxtPass,
                                 inputAction: TextInputAction.next,
+                                inputType: TextInputType.visiblePassword,
                               ),
                               UiHelper.verticalXSmall,
                               PasswordTextField(
@@ -126,6 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 controller: cnfrmPassController,
                                 hint: AppStrings.hintTxtCnfrmPass,
                                 inputAction: TextInputAction.done,
+                                inputType: TextInputType.visiblePassword,
                               ),
                               UiHelper.verticalSmall,
                               ButtonWidget(
@@ -160,8 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       signUpKey.currentState!.save();
       try {
-        final auth = Provider.of<AuthApiService>(context, listen: false);
-        final response = await auth.signUp(data);
+        final response = await AuthApiService.signUp(data);
         if (response == true) {
           Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName).then((_) {
             setState(() {
@@ -174,7 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           });
 
           Fluttertoast.showToast(
-              msg: auth.error.toString(),
+              msg: 'Unable to sign up',
               toastLength: Toast.LENGTH_LONG,
               textColor: AppColors.colorWhite);
         }

@@ -1,21 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../consts/api_strings.dart';
 import 'dart:convert';
 import '../provider/news_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../api/models/all_news_response_model.dart';
 
-class GetAllNewsService with ChangeNotifier {
-  String? error;
+class GetAllNewsService  {
   String? token;
-  Future<bool> getAllNews() async {
+ static Future<List<AllNewsModel>?> getAllNews() async {
     var url = Uri.parse(ApiStrings.getAllNewsUrl);
 
     final prefs = await SharedPreferences.getInstance();
 
-    if (!prefs.containsKey('signUpResponse')) {
-      return false;
-    }
+    if (prefs.containsKey('signUpResponse')) {
+      
+    
     final prefsData =
         jsonDecode(prefs.getString('signUpResponse')!) as Map<String, dynamic>;
     try {
@@ -28,15 +27,15 @@ class GetAllNewsService with ChangeNotifier {
         },
       );
       if (response.statusCode >= 400) {
-        error = json.decode(response.body).toString();
-        return false;
+        return null;
       } else {
         NewsProvider newsProvider = NewsProvider();
-        newsProvider.fetchAndSetFeed(json.decode(response.body));
-        return true;
+      return  newsProvider.fetchAndSetFeed(json.decode(response.body));
+        
       }
     } catch (error) {
       rethrow;
-    }
+    }}
+    return null;
   }
 }

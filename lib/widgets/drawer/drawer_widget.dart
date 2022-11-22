@@ -8,6 +8,8 @@ import '../../consts/app_img_strings.dart';
 import '../../consts/app_text_strings.dart';
 import '../gradients/icon_label_gradient.dart';
 import '../../consts/app_widgets.dart';
+import '../../api/api_service/auth_service.dart';
+import '../../screens/signin/sign_in_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -48,13 +50,18 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
               UiHelper.verticalSmall,
-             const SizedBox(
+              SizedBox(
                 width: double.infinity,
-                child:  GradientIcon(
+                child: GradientIcon(
                   isRow: true,
                   icon: Icons.logout,
                   txt: AppStrings.logOutTxt,
                   gradient: AppColors.yellowishGradient2,
+                  onTap: () async {
+                    await AuthApiService.logOut().then((value) =>
+                        Navigator.of(context)
+                            .pushReplacementNamed(SignInScreen.routeName));
+                  },
                 ),
               ),
             ],

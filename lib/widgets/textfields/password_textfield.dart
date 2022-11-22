@@ -10,6 +10,7 @@ class PasswordTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final String? Function(String?)? validator;
   final void Function(String?)? onSave;
+  final TextInputType? inputType;
   const PasswordTextField({
     Key? key,
     required this.controller,
@@ -18,7 +19,8 @@ class PasswordTextField extends StatefulWidget {
     this.onFieldSubmitted,
     this.focusNode,
     this.validator,
-    this.onSave
+    this.onSave,
+    this.inputType
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFieldWidget(
+      inputType: widget.inputType,
       validator: widget.validator,
       onSave: widget.onSave,
       focusNode: widget.focusNode,
