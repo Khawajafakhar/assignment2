@@ -19,7 +19,6 @@ class AddNewsService with ChangeNotifier {
     }
     final prefsData =
         jsonDecode(prefs.getString('signUpResponse')!) as Map<String, dynamic>;
-        print(prefsData);
     SignUpResponse userdata = SignUpResponse.fromJson(prefsData);
     uid = userdata.id;
 
@@ -47,12 +46,10 @@ class AddNewsService with ChangeNotifier {
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
       } else {
-        print(json.decode(response.body));
         error = json.decode(response.body);
         return false;
       }
     } catch (error) {
-      print('error : $error');
       rethrow;
     }
   }

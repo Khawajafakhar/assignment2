@@ -4,7 +4,6 @@ import '../../consts/api_strings.dart';
 import 'dart:convert';
 import '../provider/news_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/signup_response_model.dart';
 
 class GetAllNewsService with ChangeNotifier {
   String? error;
@@ -30,12 +29,10 @@ class GetAllNewsService with ChangeNotifier {
       );
       if (response.statusCode >= 400) {
         error = json.decode(response.body).toString();
-        print(error);
         return false;
       } else {
         NewsProvider newsProvider = NewsProvider();
         newsProvider.fetchAndSetFeed(json.decode(response.body));
-       print(json.decode(response.body));
         return true;
       }
     } catch (error) {

@@ -12,6 +12,7 @@ import './api/provider/selectmatch_provider.dart';
 import './api/api_service/addnews_servics.dart';
 import './api/api_service/get_allnews_service.dart';
 import './api/provider/news_provider.dart';
+import './screens/dashboard/bottom_Navigation_pages/news_page/news_page.dart';
 
 
 void main() {
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
             ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
             ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
             DashBoardScreen.routeName: (context) => const DashBoardScreen(),
-            AddNewsScreen.routeName: (context) =>const AddNewsScreen()
+            AddNewsScreen.routeName: (context) =>const AddNewsScreen(),
+            NewsPage.routeName:(context) => const NewsPage(),
           },
         ),
       );

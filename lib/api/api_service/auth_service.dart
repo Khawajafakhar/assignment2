@@ -5,6 +5,7 @@ import '../models/signup_model.dart';
 import '../../consts/api_strings.dart';
 import '../models/signup_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/signIn_model.dart';
 
 class AuthApiService with ChangeNotifier {
   String? _token;
@@ -21,16 +22,11 @@ class AuthApiService with ChangeNotifier {
     return null;
   }
 
-  Future<bool> signUp(SignUpData data) async {
-   try {final url = Uri.parse(ApiStrings.signUpUrl);
+  Future<bool> auth({required Map<String,String?> data,required String urlPart}) async {
+  
+  try{ final url = Uri.parse("http://54.197.94.1/api/v1/$urlPart/");
     
-      final response = await http.post(url, body: {
-        "user[email]": data.email,
-        "user[first_name]": data.firstName,
-        "user[last_name]": data.lastname,
-        "user[password]": data.pass,
-        "user[password_confirmation]": data.cnfrmPass
-      });
+      final response = await http.post(url, body: data);
       if (response.statusCode >= 400) {
         final decodedResponse = json.decode(response.body);
         error=decodedResponse["error_log"];
@@ -47,6 +43,24 @@ class AuthApiService with ChangeNotifier {
       }}catch(error){
         rethrow;
       }
-    
+  }
+  Future<bool> signUp(SignUpData data) async{
+   var mapData= {
+        "user[email]": data.email,
+        "user[first_name]": data.firstName,
+        "user[last_name]": data.lastname,
+        "user[password]": data.pass,
+        "user[password_confirmation]": data.cnfrmPass
+      };
+
+    return auth(data:mapData,urlPart:'users');
+  }
+   Future<bool> logIn(SignInData data) async{
+   var mapData= {
+        "email": data.email,
+        "password": data.pass,
+      };
+
+    return auth(data:mapData,urlPart: 'sessions');
   }
 }

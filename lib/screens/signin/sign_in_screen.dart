@@ -14,14 +14,30 @@ import '../../screens/signup/sign_up_screen.dart';
 import '../../widgets/app_logo_widget.dart';
 import '../forgot_password/forgot_password_screen.dart';
 import '../dashboard/dashboard_screen.dart';
+import 'package:provider/provider.dart';
+import '../../api/api_service/auth_service.dart';
+import '../../api/models/signIn_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../../validation/loc_validation.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   static const routeName = 'signin-screen';
-  SignInScreen({super.key});
+  const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passController = TextEditingController();
+
   BuildContext? ctx;
+  bool isLoading = false;
+  SignInData data = SignInData(email: null, pass: null);
 
   @override
   Widget build(BuildContext context) {
@@ -34,55 +50,67 @@ class SignInScreen extends StatelessWidget {
         appBar: const AppBarWidget(
           txt: AppStrings.txtSignIn,
         ),
-        body: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            UiHelper.verticalMedium,
-            const AppLogoWidget(),
-            UiHelper.verticalSmall1,
-            Form(
-                key: formKey,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Column(
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextFieldWidget(
-                        textController: emailController,
-                        hint: AppStrings.hintTxtEmail,
-                        prefix: Image.asset(AppImages.imgEmailIcon),
-                        inputAction: TextInputAction.next,
-                      ),
+                      UiHelper.verticalMedium,
+                      const AppLogoWidget(),
+                      UiHelper.verticalSmall1,
+                      Form(
+                          key: formKey,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 25.0),
+                            child: Column(
+                              children: [
+                                TextFieldWidget(
+                                  textController: emailController,
+                                  hint: AppStrings.hintTxtEmail,
+                                  prefix: Image.asset(AppImages.imgEmailIcon),
+                                  inputAction: TextInputAction.next,
+                                  validator: (value) =>
+                                      Validation.isEmailValid(value!),
+                                  onSave: (value) => data.email = value,
+                                ),
+                                UiHelper.verticalXSmall,
+                                PasswordTextField(
+                                  controller: passController,
+                                  hint: AppStrings.hintTxtPass,
+                                  validator: (value) =>
+                                      Validation.isPasswordValid(value!),
+                                  onSave: (value) => data.pass = value,
+                                ),
+                                UiHelper.verticalXSmall,
+                                TextButtonwidget(
+                                  txt: AppStrings.btnTxtForgotPass,
+                                  align: Alignment.topRight,
+                                  onPressed: onForgotPressed,
+                                ),
+                                ButtonWidget(
+                                  height: 40,
+                                  width: double.infinity,
+                                  txt: AppStrings.txtSignIn,
+                                  fontSize: 18,
+                                  onPressed: onSignInPressed,
+                                )
+                              ],
+                            ),
+                          )),
                       UiHelper.verticalXSmall,
-                      PasswordTextField(
-                        controller: passController,
-                        hint: AppStrings.hintTxtPass,
+                      const SocialAccountWidget(),
+                      UiHelper.verticalMedium,
+                      RichTextWidget(
+                        txt: AppStrings.txtNewAcc,
+                        txt2: AppStrings.txtSignUp,
+                        onPressed: onSignUpPressed,
                       ),
-                      UiHelper.verticalXSmall,
-                      TextButtonwidget(
-                        txt: AppStrings.btnTxtForgotPass,
-                        align: Alignment.topRight,
-                        onPressed: onForgotPressed,
-                      ),
-                      ButtonWidget(
-                        height: 40,
-                        width: double.infinity,
-                        txt: AppStrings.txtSignIn,
-                        fontSize: 18,
-                        onPressed: onSignInPressed,
-                      )
-                    ],
-                  ),
-                )),
-            UiHelper.verticalXSmall,
-            const SocialAccountWidget(),
-            UiHelper.verticalMedium,
-            RichTextWidget(
-              txt: AppStrings.txtNewAcc,
-              txt2: AppStrings.txtSignUp,
-              onPressed: onSignUpPressed,
-            ),
-          ]),
-        ),
+                    ]),
+              ),
       ),
     );
   }
@@ -94,7 +122,39 @@ class SignInScreen extends StatelessWidget {
   void onForgotPressed() {
     Navigator.of(ctx!).pushNamed(ForgotPasswordScreen.routeName);
   }
-  void onSignInPressed() {
-    Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName);
+
+  void onSignInPressed() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = !isLoading;
+      });
+      formKey.currentState!.save();
+      try {
+        final auth = Provider.of<AuthApiService>(context, listen: false);
+        final response = await auth.logIn(data);
+        if (response == true) {
+          await Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName);
+          setState(() {
+            isLoading = !isLoading;
+          });
+        } else if (response == false) {
+          setState(() {
+            isLoading = !isLoading;
+          });
+          Fluttertoast.showToast(
+              msg: auth.error.toString(),
+              toastLength: Toast.LENGTH_LONG,
+              textColor: AppColors.colorWhite);
+        }
+      } catch (error) {
+        setState(() {
+          isLoading = !isLoading;
+        });
+        Fluttertoast.showToast(
+            msg: error.toString(),
+            toastLength: Toast.LENGTH_LONG,
+            textColor: AppColors.colorWhite);
+      }
+    }
   }
 }

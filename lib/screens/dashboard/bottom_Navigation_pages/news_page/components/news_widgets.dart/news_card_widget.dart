@@ -4,7 +4,17 @@ import './feed_img_widget.dart';
 import '../../../../../../widgets/text_widget.dart';
 
 class NewsCardWidget extends StatelessWidget {
-  const NewsCardWidget({super.key});
+  const NewsCardWidget({
+    super.key,
+    this.firstName,
+    this.lastName,
+    this.discription,
+    this.createdAt,
+  });
+  final String? firstName;
+  final String? lastName;
+  final String? discription;
+  final String? createdAt;
 
   @override
   Widget build(BuildContext context) {
@@ -43,26 +53,25 @@ class NewsCardWidget extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children:  [
                               TextWidget(
-                                txt: 'James FC',
+                                txt: '$firstName $lastName',
                                 fontSize: 18,
                                 color: AppColors.colorWhite,
                               ),
                               TextWidget(
-                                txt: '1 minute ago',
+                                txt: createdAt,
                                 fontSize: 12,
                                 color: AppColors.richTextBtnColor,
                               )
                             ],
                           )),
                       Expanded(
-                          child:  TextWidget(
-                            color: AppColors.colorWhite.withOpacity(0.6),
-                            fontSize: 12,
-                            txt:
-                                'Gianni Infantino’s presidency has focused on bringing wide-ranging reforms to FIFA, expanding global participation in FIFA’s flagship competitions and boosting FIFA’s investment in football.',
-                          ))
+                          child: TextWidget(
+                        color: AppColors.colorWhite.withOpacity(0.6),
+                        fontSize: 12,
+                        txt:discription,
+                      ))
                     ],
                   ),
                 ))

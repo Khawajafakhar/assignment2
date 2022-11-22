@@ -8,6 +8,7 @@ import 'components/feed_page.dart';
 import 'components/my_feed_page.dart';
 
 class NewsPage extends StatefulWidget {
+  static const routeName='news-feed-page';
  const NewsPage({super.key});
 
   @override

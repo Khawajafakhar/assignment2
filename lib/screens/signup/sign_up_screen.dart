@@ -19,7 +19,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routename = 'sign-up-screen';
- const SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -159,26 +159,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
         isLoading = !isLoading;
       });
       signUpKey.currentState!.save();
-      try{final auth = Provider.of<AuthApiService>(context, listen: false);
-      final response = await auth.signUp(data);
-      if (response == true) {
-        Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName);
-        
-      } else if (response == false) {
-        
-        Fluttertoast.showToast(
-            msg: auth.error.toString(),
-            toastLength: Toast.LENGTH_LONG,
-            textColor: AppColors.colorWhite);
-      }}catch(error){
+      try {
+        final auth = Provider.of<AuthApiService>(context, listen: false);
+        final response = await auth.signUp(data);
+        if (response == true) {
+          Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName).then((_) {
+            setState(() {
+              isLoading = !isLoading;
+            });
+          });
+        } else if (response == false) {
+          setState(() {
+            isLoading = !isLoading;
+          });
+
+          Fluttertoast.showToast(
+              msg: auth.error.toString(),
+              toastLength: Toast.LENGTH_LONG,
+              textColor: AppColors.colorWhite);
+        }
+      } catch (error) {
+        setState(() {
+          isLoading = !isLoading;
+        });
         Fluttertoast.showToast(
             msg: error.toString(),
             toastLength: Toast.LENGTH_LONG,
             textColor: AppColors.colorWhite);
       }
-      setState(() {
-          isLoading = !isLoading;
-        });
     }
   }
 }

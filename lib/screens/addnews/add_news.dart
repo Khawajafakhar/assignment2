@@ -1,3 +1,4 @@
+import 'package:assigment2/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../consts/app_text_strings.dart';
@@ -147,22 +148,28 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       final response = await addNews.addNews(
           title: title, discription: discription, matchId: matchId);
       if (response == true) {
-        getDataAndPop();
+        Navigator.of(ctx!).pop();
+        setState(() {
+          isLoading = !isLoading;
+        });
       } else {
+        setState(() {
+          isLoading = !isLoading;
+        });
         Fluttertoast.showToast(
             msg: addNews.error.toString(),
             toastLength: Toast.LENGTH_LONG,
             textColor: AppColors.colorWhite);
       }
     } catch (error) {
+      setState(() {
+        isLoading = !isLoading;
+      });
       Fluttertoast.showToast(
           msg: error.toString(),
           toastLength: Toast.LENGTH_LONG,
           textColor: AppColors.colorWhite);
     }
-    setState(() {
-      isLoading = !isLoading;
-    });
   }
 
   void getDataAndPop() async {
@@ -170,7 +177,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
     try {
       await getAllNews.getAllNews().then((response) {
         if (response == true) {
-          Navigator.of(ctx!).pop();
+          Navigator.of(ctx!).pushReplacementNamed(DashBoardScreen.routeName);
         } else {
           Fluttertoast.showToast(
               msg: getAllNews.error!,
@@ -179,7 +186,6 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
         }
       });
     } catch (error) {
-      print(error);
       Fluttertoast.showToast(
           msg: error.toString(),
           toastLength: Toast.LENGTH_LONG,
