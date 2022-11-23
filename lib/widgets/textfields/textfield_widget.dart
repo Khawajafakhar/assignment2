@@ -67,6 +67,8 @@ class TextFieldWidget extends StatelessWidget {
       onTap: onTap,
       readOnly: readOnly!,
       keyboardType: inputType,
+      enableInteractiveSelection: false,
+      
       style: const TextStyle(color: AppColors.txtColorWhite),
       decoration: InputDecoration(
           fillColor: fillColor,

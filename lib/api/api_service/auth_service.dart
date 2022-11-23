@@ -59,11 +59,10 @@ class AuthApiService {
       final url = Uri.parse(ApiStrings.forgotPassUrl);
       final response = await http.put(url, body: {"email": email});
       if (response.statusCode >= 400) {
-       
         return false;
       } else {
         restResponse = jsonDecode(response.body);
-         Fluttertoast.showToast(
+        Fluttertoast.showToast(
           msg: jsonDecode(response.body).toString(),
           toastLength: Toast.LENGTH_LONG,
           textColor: AppColors.colorWhite,
@@ -74,18 +73,18 @@ class AuthApiService {
       rethrow;
     }
   }
-  static Future<void> logOut()async{
-  final prefs = await SharedPreferences.getInstance();
-  prefs.clear();
-  }
- static Future<bool> tryAutoLogin()async{
+
+  static Future<void> logOut() async {
     final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('signUpResponse')){
+    prefs.clear();
+  }
+
+  static Future<bool> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('signUpResponse')) {
       return false;
-    }
-    else{
+    } else {
       return true;
     }
-
   }
 }

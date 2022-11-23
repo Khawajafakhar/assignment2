@@ -106,6 +106,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                         child: TextFieldWidget(
                             textController: searchController,
                             inputAction: TextInputAction.none,
+                            inputType: TextInputType.none,
                             fillColor: AppColors.backGroundColor,
                             hint: AppStrings.searchTxt,
                             borderSideColor: AppColors.colorWhite,
@@ -132,6 +133,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       builder: (context) => const BottomSheetContent(),
     ).then((value) {
       matchId = value;
+      searchController.text=value.toString();
     });
   }
 

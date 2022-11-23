@@ -1,5 +1,6 @@
 import 'package:assigment2/screens/onBoard/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import './screens/signin/sign_in_screen.dart';
 import './screens/signup/sign_up_screen.dart';
 import './screens/forgot_password/forgot_password_screen.dart';
@@ -10,25 +11,40 @@ import 'package:provider/provider.dart';
 import './api/provider/selectmatch_provider.dart';
 import './screens/dashboard/bottom_Navigation_pages/news_page/news_page.dart';
 import 'api/api_service/auth_service.dart';
-import './widgets/splash_widget.dart';
+
 
 void main() {
+  FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SelectMatchProvider(),
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+        title: 'Assignment 2',
+        
+        home: FutureBuilder(
+          future: AuthApiService.tryAutoLogin(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              if (snapshot.data == true) {
+                return const DashBoardScreen();
+              } else {
+                return OnBoardingScreen();
+              }
+            }
+          },
         ),
-        home: OnBoardingScreen(),
         routes: {
           SignInScreen.routeName: (context) => const SignInScreen(),
           SignUpScreen.routename: (context) => const SignUpScreen(),

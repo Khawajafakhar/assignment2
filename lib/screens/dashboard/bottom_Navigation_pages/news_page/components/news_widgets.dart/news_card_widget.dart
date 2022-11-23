@@ -54,7 +54,7 @@ class NewsCardWidget extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:  [
+                            children: [
                               TextWidget(
                                 txt: '$firstName $lastName',
                                 fontSize: 16,
@@ -69,10 +69,11 @@ class NewsCardWidget extends StatelessWidget {
                           )),
                       Expanded(
                           child: TextWidget(
-                        color: AppColors.colorWhite.withOpacity(0.6),
-                        fontSize: 12,
-                        txt:discription,
-                      ))
+                            overFlow: TextOverflow.ellipsis,
+                            color: AppColors.colorWhite.withOpacity(0.6),
+                            fontSize: 12,
+                            txt: discription,
+                          ))
                     ],
                   ),
                 ))

@@ -10,7 +10,7 @@ class PageViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       controller: controller,
-      children: [
+      children:const [
         OnBoardWidget(
           image: AppImages.onBoard1,
         ),

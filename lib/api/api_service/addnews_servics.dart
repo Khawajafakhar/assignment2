@@ -39,6 +39,7 @@ class AddNewsService {
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
       } else {
+        print(jsonDecode(response.body));
         return false;
       }
     } catch (error) {
