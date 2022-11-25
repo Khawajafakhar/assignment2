@@ -6,6 +6,7 @@ import 'components/news_widgets.dart/tabbar_widget.dart';
 import 'components/approvals_page.dart';
 import 'components/feed_page.dart';
 import 'components/my_feed_page.dart';
+import '../../../../api/api_service/get_allnews_service.dart';
 
 class NewsPage extends StatefulWidget {
   static const routeName='news-feed-page';
@@ -23,6 +24,7 @@ class _NewsPageState extends State<NewsPage> {
     const MyFeedPage(),
     const ApprovalsPage(),
   ];
+
 
   @override
   Widget build(BuildContext context) {

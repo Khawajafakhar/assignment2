@@ -11,8 +11,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 class AuthApiService {
   static Map<String, dynamic>? restResponse;
 
-  static Future<bool> auth(
-      {required Map<String, String?> data, required String urlPart}) async {
+  static Future<bool> auth({
+    required Map<String, String?> data,
+    required String urlPart,
+  }) async {
     try {
       final url = Uri.parse("http://54.197.94.1/api/v1/$urlPart/");
 
@@ -21,7 +23,7 @@ class AuthApiService {
         return false;
       } else {
         final decodedResponse = json.decode(response.body);
-        SignUpResponse responseData = SignUpResponse.fromJson(decodedResponse);
+        AuthResponse responseData = AuthResponse.fromJson(decodedResponse);
         Map<String, dynamic> userData = responseData.toJson();
         String jsonString = jsonEncode(userData);
         final prefs = await SharedPreferences.getInstance();

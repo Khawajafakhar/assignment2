@@ -3,11 +3,10 @@ import '../../consts/api_strings.dart';
 import 'dart:convert';
 import '../provider/news_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../api/models/all_news_response_model.dart';
 
 class GetAllNewsService  {
-  String? token;
- static Future<List<AllNewsModel>?> getAllNews() async {
+  // String? token;
+ static Future<void> getAllNews() async {
     var url = Uri.parse(ApiStrings.getAllNewsUrl);
 
     final prefs = await SharedPreferences.getInstance();
@@ -18,6 +17,7 @@ class GetAllNewsService  {
     final prefsData =
         jsonDecode(prefs.getString('signUpResponse')!) as Map<String, dynamic>;
     try {
+      print('get request running');
       final response = await http.get(
         url,
         headers: {
@@ -27,16 +27,15 @@ class GetAllNewsService  {
         },
       );
       if (response.statusCode >= 400) {
-        print(jsonDecode(response.body));
-        return null;
+        print('Error : ${jsonDecode(response.body)}');
       } else {
+        print('positive http response');
         NewsProvider newsProvider = NewsProvider();
-      return  newsProvider.fetchAndSetFeed(json.decode(response.body));
+       newsProvider.fetchAndSetFeed=json.decode(response.body);
         
       }
     } catch (error) {
       rethrow;
     }}
-    return null;
   }
 }

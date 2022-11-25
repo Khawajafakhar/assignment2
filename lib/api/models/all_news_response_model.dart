@@ -9,7 +9,7 @@ class AllNewsModel {
   String? createdAt;
   String? updatedAt;
   int? matchId;
-  SignUpResponse? user;
+  AuthResponse? user;
 
   AllNewsModel(
       {this.id,
@@ -31,6 +31,6 @@ class AllNewsModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     matchId = json['match_id'];
-    user = json['user'] != null ? SignUpResponse.fromJson(json['user']) : null;
+    user = json['user'] != null ? AuthResponse.fromJson(json['user']) : null;
   }
 }

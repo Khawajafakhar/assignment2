@@ -15,7 +15,7 @@ class AddNewsService {
     }
     final prefsData =
         jsonDecode(prefs.getString('signUpResponse')!) as Map<String, dynamic>;
-    SignUpResponse userdata = SignUpResponse.fromJson(prefsData);
+    AuthResponse userdata = AuthResponse.fromJson(prefsData);
 
     final mapData = jsonEncode({
       "news": {

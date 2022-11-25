@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'news_widgets.dart/news_card_widget.dart';
 import '../../../../../api/api_service/get_allnews_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import '../../../../../api/provider/news_provider.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -12,43 +14,37 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<AllNewsModel> feedList = [];
-  bool isLoading = true;
+
+    bool isLoading =true;
   @override
-  void didChangeDependencies() async {
-    if (isLoading) {
-      await getList();
-    }
-    setState(() {
-      isLoading = !isLoading;
-    });
+  void didChangeDependencies() {
+if(isLoading){
+  print('get lis running');
+  getList();
+}
+setState(() {
+  isLoading=!isLoading;
+});
     super.didChangeDependencies();
   }
 
-  Future<void> getList() async {
-    final feedData = await GetAllNewsService.getAllNews();
-    if (feedData != null) {
-      feedList = feedData;
-    } else {
-      Fluttertoast.showToast(
-        msg: 'not working',
-      );
-    }
+  void getList()async{
+ await GetAllNewsService.getAllNews();
+ 
+  print('did change ');
   }
 
   @override
   Widget build(BuildContext context) {
-
+     var newsData =Provider.of<NewsProvider>(context);
+    var feedList=newsData.list;
+ print(feedList.length);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: SizedBox(
         height: double.infinity,
         width: double.infinity,
-        child: isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : ListView.builder(
+        child:  ListView.builder(
                 itemCount: feedList.length,
                 itemBuilder: (context, index) => NewsCardWidget(
                   firstName: feedList[index].user!.firstName,
