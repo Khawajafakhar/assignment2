@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
+
 import './signup_response_model.dart';
 
-class AllNewsModel {
+class AllNewsModel with ChangeNotifier {
   int? id;
   String? title;
   String? description;
@@ -32,5 +34,14 @@ class AllNewsModel {
     updatedAt = json['updated_at'];
     matchId = json['match_id'];
     user = json['user'] != null ? AuthResponse.fromJson(json['user']) : null;
+  }
+
+  List<AllNewsModel> fetchAndSetFeed(List<dynamic> jsonResponse) {
+    List<AllNewsModel> fetchedList = [];
+    for (var data in jsonResponse) {
+      fetchedList.add(AllNewsModel.fromJson(data));
+    }
+
+    return fetchedList;
   }
 }

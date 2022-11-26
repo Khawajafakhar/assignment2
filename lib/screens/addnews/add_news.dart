@@ -148,7 +148,6 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       final response = await AddNewsService.addNews(
           title: title, discription: discription, matchId: matchId);
       if (response == true) {
-        await GetAllNewsService.getAllNews();
           Navigator.of(ctx!).pushReplacementNamed(DashBoardScreen.routeName);
         setState(() {
           isLoading = !isLoading;

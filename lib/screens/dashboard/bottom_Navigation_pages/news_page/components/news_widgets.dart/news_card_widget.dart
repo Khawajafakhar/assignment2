@@ -1,8 +1,10 @@
+import 'package:assigment2/api/models/all_news_response_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../consts/app_colors_strings.dart';
-import './feed_img_widget.dart';
 import '../../../../../../widgets/text_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:provider/provider.dart';
+import '../../../../../../consts/app_img_strings.dart';
 
 class NewsCardWidget extends StatelessWidget {
   const NewsCardWidget({
@@ -19,6 +21,7 @@ class NewsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final feedData = Provider.of<AllNewsModel>(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       height: 140,
@@ -37,8 +40,28 @@ class NewsCardWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.max,
-                  children: const [
-                    FeedImgWidget(),
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      decoration: const BoxDecoration(
+                          gradient: AppColors.yellowishGradient2,
+                          shape: BoxShape.circle),
+                      child: Center(
+                          child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.backGroundColor),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Image.asset(
+                              AppImages.imgProfile,
+                              fit: BoxFit.cover,
+                            )),
+                      )),
+                    ),
                   ],
                 )),
             Expanded(
@@ -56,12 +79,14 @@ class NewsCardWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextWidget(
-                                txt: '$firstName $lastName',
+                                txt:
+                                    '${feedData.user!.firstName} ${feedData.user!.lastName}',
                                 fontSize: 16,
                                 color: AppColors.colorWhite,
                               ),
                               TextWidget(
-                                txt: timeago.format(DateTime.parse(createdAt!)),
+                                txt: timeago.format(
+                                    DateTime.parse(feedData.createdAt!)),
                                 fontSize: 12,
                                 color: AppColors.richTextBtnColor,
                               )
@@ -69,11 +94,11 @@ class NewsCardWidget extends StatelessWidget {
                           )),
                       Expanded(
                           child: TextWidget(
-                            overFlow: TextOverflow.ellipsis,
-                            color: AppColors.colorWhite.withOpacity(0.6),
-                            fontSize: 12,
-                            txt: discription,
-                          ))
+                        overFlow: TextOverflow.ellipsis,
+                        color: AppColors.colorWhite.withOpacity(0.6),
+                        fontSize: 12,
+                        txt: feedData.description,
+                      ))
                     ],
                   ),
                 ))

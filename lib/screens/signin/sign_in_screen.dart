@@ -14,7 +14,6 @@ import '../../screens/signup/sign_up_screen.dart';
 import '../../widgets/app_logo_widget.dart';
 import '../forgot_password/forgot_password_screen.dart';
 import '../dashboard/dashboard_screen.dart';
-import 'package:provider/provider.dart';
 import '../../api/api_service/auth_service.dart';
 import '../../api/models/signin_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
