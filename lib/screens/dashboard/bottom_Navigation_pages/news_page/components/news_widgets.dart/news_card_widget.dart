@@ -21,7 +21,7 @@ class NewsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final feedData = Provider.of<AllNewsModel>(context);
+    // final feedData = Provider.of<AllNewsModel>(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       height: 140,
@@ -80,13 +80,13 @@ class NewsCardWidget extends StatelessWidget {
                             children: [
                               TextWidget(
                                 txt:
-                                    '${feedData.user!.firstName} ${feedData.user!.lastName}',
+                                    '$firstName $lastName',
                                 fontSize: 16,
                                 color: AppColors.colorWhite,
                               ),
                               TextWidget(
                                 txt: timeago.format(
-                                    DateTime.parse(feedData.createdAt!)),
+                                    DateTime.parse(createdAt!)),
                                 fontSize: 12,
                                 color: AppColors.richTextBtnColor,
                               )
@@ -97,7 +97,7 @@ class NewsCardWidget extends StatelessWidget {
                         overFlow: TextOverflow.ellipsis,
                         color: AppColors.colorWhite.withOpacity(0.6),
                         fontSize: 12,
-                        txt: feedData.description,
+                        txt: discription,
                       ))
                     ],
                   ),

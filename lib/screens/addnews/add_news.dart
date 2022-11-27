@@ -10,6 +10,7 @@ import './components/botom_sheet_content.dart';
 import '../../api/api_service/addnews_servics.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../api/api_service/get_allnews_service.dart';
+import '../../api/api_service/get_allnews_service.dart';
 
 class AddNewsScreen extends StatefulWidget {
   static const routeName = 'add-news-screen';
@@ -134,7 +135,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       builder: (context) => const BottomSheetContent(),
     ).then((value) {
       matchId = value;
-      searchController.text=value.toString();
+      searchController.text = value.toString();
     });
   }
 
@@ -148,10 +149,13 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       final response = await AddNewsService.addNews(
           title: title, discription: discription, matchId: matchId);
       if (response == true) {
-          Navigator.of(ctx!).pushReplacementNamed(DashBoardScreen.routeName);
-        setState(() {
-          isLoading = !isLoading;
-        });
+        await GetAllNewsService.getAllNews().then((_) => {
+              Navigator.of(ctx!)
+                  .pushReplacementNamed(DashBoardScreen.routeName),
+              setState(() {
+                isLoading = !isLoading;
+              })
+            });
       } else {
         setState(() {
           isLoading = !isLoading;
@@ -171,5 +175,4 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
           textColor: AppColors.colorWhite);
     }
   }
-
 }
