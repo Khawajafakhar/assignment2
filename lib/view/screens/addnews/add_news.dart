@@ -9,6 +9,7 @@ import '../../../widgets/text_widget.dart';
 import './components/botom_sheet_content.dart';
 import '../../../api/api_service/addnews_servics.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../../utils/routes/routes_name.dart';
 
 class AddNewsScreen extends StatefulWidget {
   static const routeName = 'add-news-screen';
@@ -147,7 +148,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
       final response = await AddNewsService.addNews(
           title: title, discription: discription, matchId: matchId);
       if (response == true) {
-          Navigator.of(ctx!).pushReplacementNamed(DashBoardScreen.routeName);
+          Navigator.pushReplacementNamed(ctx!,RoutesName.dashBoaard);
         setState(() {
           isLoading = !isLoading;
         });

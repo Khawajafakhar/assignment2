@@ -15,6 +15,7 @@ import '../../../validation/loc_validation.dart';
 import '../../../api/api_service/auth_service.dart';
 import '../dashboard/dashboard_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../../utils/routes/routes_name.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routename = 'sign-up-screen';
@@ -153,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void onSignInPressed() {
-    Navigator.of(ctx!).pushNamed(SignInScreen.routeName);
+    Navigator.pushNamed(ctx!,RoutesName.login);
   }
 
   Future<void> onSignUpPressed() async {
@@ -165,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       try {
         final response = await AuthApiService.signUp(data);
         if (response == true) {
-          Navigator.of(ctx!).pushNamed(DashBoardScreen.routeName).then((_) {
+          Navigator.pushNamed(ctx!,RoutesName.dashBoaard).then((_) {
             setState(() {
               isLoading = !isLoading;
             });

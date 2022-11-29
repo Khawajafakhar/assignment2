@@ -10,6 +10,7 @@ import '../gradients/icon_label_gradient.dart';
 import '../../consts/app_widgets.dart';
 import '../../api/api_service/auth_service.dart';
 import '../../view/screens/signin/sign_in_screen.dart';
+import '../../utils/routes/routes_name.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -59,8 +60,8 @@ class DrawerWidget extends StatelessWidget {
                   gradient: AppColors.yellowishGradient2,
                   onTap: () async {
                     await AuthApiService.logOut().then((value) =>
-                        Navigator.of(context)
-                            .pushReplacementNamed(SignInScreen.routeName));
+                        Navigator
+                            .pushReplacementNamed(context,RoutesName.login));
                   },
                 ),
               ),

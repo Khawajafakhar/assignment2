@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../onBoard/components/page_indicator_widget.dart';
 import '../../../widgets/buttons/elevated_button_widget.dart';
 import '../signin/sign_in_screen.dart';
+import '../../../utils/routes/routes_name.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
@@ -50,6 +51,6 @@ class OnBoardingScreen extends StatelessWidget {
   }
 
   void getStartedButton() {
-    Navigator.of(ctx!).pushNamed(SignInScreen.routeName);
+    Navigator.pushNamed(ctx!,RoutesName.login);
   }
 }

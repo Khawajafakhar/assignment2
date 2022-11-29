@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../consts/app_colors_strings.dart';
 import '../../view/screens/addnews/add_news.dart';
+import '../../utils/routes/routes_name.dart';
 
 class FloatingButtonWidget extends StatelessWidget {
   const FloatingButtonWidget({super.key});
@@ -12,7 +13,7 @@ class FloatingButtonWidget extends StatelessWidget {
       child: FloatingActionButton(
         backgroundColor: Colors.transparent,
         onPressed: () {
-          Navigator.of(context).pushNamed(AddNewsScreen.routeName);
+          Navigator.pushNamed(context,RoutesName.addNews);
         },
         child: Container(
           height: 45,

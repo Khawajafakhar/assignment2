@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import './api/provider/selectmatch_provider.dart';
 import 'view/screens/dashboard/bottom_Navigation_pages/news_page/news_page.dart';
 import 'api/api_service/auth_service.dart';
+import './utils/routes/routes.dart';
 
 
 void main() {
@@ -45,16 +46,18 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
-        routes: {
-          SignInScreen.routeName: (context) => const SignInScreen(),
-          SignUpScreen.routename: (context) => const SignUpScreen(),
-          ForgotPasswordScreen.routeName: (context) =>
-              const ForgotPasswordScreen(),
-          ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
-          DashBoardScreen.routeName: (context) => const DashBoardScreen(),
-          AddNewsScreen.routeName: (context) => const AddNewsScreen(),
-          NewsPage.routeName: (context) => const NewsPage(),
-        },
+        onGenerateRoute: Routes.generateRoutes,
+
+        // routes: {
+        //   SignInScreen.routeName: (context) => const SignInScreen(),
+        //   SignUpScreen.routename: (context) => const SignUpScreen(),
+        //   ForgotPasswordScreen.routeName: (context) =>
+        //       const ForgotPasswordScreen(),
+        //   ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
+        //   DashBoardScreen.routeName: (context) => const DashBoardScreen(),
+        //   AddNewsScreen.routeName: (context) => const AddNewsScreen(),
+        //   NewsPage.routeName: (context) => const NewsPage(),
+        // },
       ),
     );
   }

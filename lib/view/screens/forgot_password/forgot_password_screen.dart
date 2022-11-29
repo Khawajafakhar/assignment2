@@ -14,6 +14,7 @@ import '../signup/sign_up_screen.dart';
 import '../../../validation/loc_validation.dart';
 import '../../../api/api_service/auth_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../../utils/routes/routes_name.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static const routeName = 'forgot-pass-screen';
@@ -102,7 +103,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             isLoading = !isLoading;
           });
 
-          Navigator.of(ctx!).pushNamed(ResetPasswordScreen.routeName);
+          Navigator.pushNamed(ctx!,RoutesName.resetPassword);
         } else {
           setState(() {
             isLoading = !isLoading;
@@ -117,6 +118,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   void onSignUpPressed() {
-    Navigator.of(ctx!).pushNamed(SignUpScreen.routename);
+    Navigator.pushNamed(ctx!,RoutesName.signUp);
   }
 }
