@@ -1,15 +1,15 @@
-import 'package:assigment2/screens/onBoard/on_boarding_screen.dart';
+import 'package:assigment2/view/screens/onBoard/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import './screens/signin/sign_in_screen.dart';
-import './screens/signup/sign_up_screen.dart';
-import './screens/forgot_password/forgot_password_screen.dart';
-import './screens/resetpassword/reset_pass_screen.dart';
-import './screens/dashboard/dashboard_screen.dart';
-import './screens/addnews/add_news.dart';
+import 'view/screens/signin/sign_in_screen.dart';
+import 'view/screens/signup/sign_up_screen.dart';
+import 'view/screens/forgot_password/forgot_password_screen.dart';
+import 'view/screens/resetpassword/reset_pass_screen.dart';
+import 'view/screens/dashboard/dashboard_screen.dart';
+import 'view/screens/addnews/add_news.dart';
 import 'package:provider/provider.dart';
 import './api/provider/selectmatch_provider.dart';
-import './screens/dashboard/bottom_Navigation_pages/news_page/news_page.dart';
+import 'view/screens/dashboard/bottom_Navigation_pages/news_page/news_page.dart';
 import 'api/api_service/auth_service.dart';
 
 

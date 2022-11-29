@@ -9,7 +9,7 @@ import '../../consts/app_text_strings.dart';
 import '../gradients/icon_label_gradient.dart';
 import '../../consts/app_widgets.dart';
 import '../../api/api_service/auth_service.dart';
-import '../../screens/signin/sign_in_screen.dart';
+import '../../view/screens/signin/sign_in_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});

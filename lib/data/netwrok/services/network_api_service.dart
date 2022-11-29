@@ -1,0 +1,54 @@
+import 'dart:io';
+import 'package:assigment2/data/netwrok/base_api_service.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../../app_exceptions.dart';
+
+class NetworkApiService extends BaseApiService {
+  @override
+  Future getGetApiResponse(header, String url) async {
+    dynamic jsonResponse;
+    try {
+      final response = await http.get(Uri.parse(url));
+      jsonResponse = retrunJson(response);
+    } on SocketException {
+      return FetchDataException(message: 'No Internet');
+    }
+    return jsonResponse;
+  }
+
+  @override
+  Future getPostApiResponse(header, String url, body) async {
+    dynamic jsonResponse;
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: header,
+        body: body,
+      );
+      jsonResponse = retrunJson(response);
+    } on SocketException {
+      return FetchDataException(message: 'No Internet');
+    }
+    return jsonResponse;
+  }
+
+  dynamic retrunJson(http.Response response) {
+    switch (response.statusCode) {
+      case 200:
+        dynamic decoded = json.decode(response.body);
+        return decoded;
+      case 201:
+        dynamic decoded = json.decode(response.body);
+        return decoded;
+      case 401:
+        throw UnathorizedException(message: response.body.toString());
+      case 422:
+        throw BadDataException(message: response.body.toString());
+      default:
+        throw FetchDataException(
+            message:
+                'Error with status code ${response.statusCode.toString()}');
+    }
+  }
+}

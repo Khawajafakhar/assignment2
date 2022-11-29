@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../consts/app_colors_strings.dart';
-import '../../screens/addnews/add_news.dart';
+import '../../view/screens/addnews/add_news.dart';
 
 class FloatingButtonWidget extends StatelessWidget {
   const FloatingButtonWidget({super.key});
