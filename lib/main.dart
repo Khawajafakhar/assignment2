@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'view/screens/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
-import './api/provider/selectmatch_provider.dart';
+import 'view_model/selectmatch_provider.dart';
 import './utils/routes/routes.dart';
 import './view_model/auth_provider.dart';
 

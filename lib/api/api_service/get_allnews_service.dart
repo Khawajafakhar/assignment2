@@ -27,7 +27,6 @@ class GetAllNewsService  {
         },
       );
       if (response.statusCode >= 400) {
-        print(jsonDecode(response.body));
         return null;
       } else {
         NewsProvider newsProvider = NewsProvider();

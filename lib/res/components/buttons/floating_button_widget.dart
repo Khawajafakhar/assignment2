@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../consts/app_colors_strings.dart';
-import '../../../../view/screens/addnews/add_news.dart';
 import '../../../../utils/routes/routes_name.dart';
 
 class FloatingButtonWidget extends StatelessWidget {

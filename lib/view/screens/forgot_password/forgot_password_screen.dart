@@ -11,9 +11,7 @@ import '../../../res/consts/app_img_strings.dart';
 import '../../../res/components/buttons/elevated_button_widget.dart';
 import '../../../res/components/rich_text_widget.dart';
 import '../../../validation/loc_validation.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../utils/routes/routes_name.dart';
-import '../../../utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
