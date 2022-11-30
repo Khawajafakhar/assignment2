@@ -1,5 +1,5 @@
 import '../models/selectmatch_model.dart';
-import '../../consts/app_img_strings.dart';
+import '../../res/consts/app_img_strings.dart';
 import 'package:flutter/material.dart';
 
 class SelectMatchProvider with ChangeNotifier {

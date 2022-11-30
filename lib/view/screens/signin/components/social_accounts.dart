@@ -1,8 +1,8 @@
-import 'package:assigment2/consts/app_colors_strings.dart';
-import 'package:assigment2/consts/app_text_strings.dart';
-import 'package:assigment2/widgets/text_widget.dart';
+import 'package:assigment2/res/consts/app_colors_strings.dart';
+import 'package:assigment2/res/consts/app_text_strings.dart';
+import 'package:assigment2/res/components/text_widget.dart';
 import 'package:flutter/material.dart';
-import '../../../../consts/app_img_strings.dart';
+import '../../../../res/consts/app_img_strings.dart';
 
 class SocialAccountWidget extends StatelessWidget {
   const SocialAccountWidget({super.key});

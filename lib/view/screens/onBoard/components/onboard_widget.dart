@@ -1,8 +1,8 @@
-import 'package:assigment2/consts/app_text_strings.dart';
+import 'package:assigment2/res/consts/app_text_strings.dart';
 import 'package:flutter/cupertino.dart';
-import '../../../../consts/app_colors_strings.dart';
-import '../../../../widgets/text_widget.dart';
-import '../../../../consts/ui_helper.dart';
+import '../../../../res/consts/app_colors_strings.dart';
+import '../../../../res/components/text_widget.dart';
+import '../../../../res/consts/ui_helper.dart';
 
 class OnBoardWidget extends StatelessWidget {
  const OnBoardWidget({super.key, required this.image});

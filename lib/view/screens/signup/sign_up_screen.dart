@@ -1,24 +1,21 @@
-import 'package:assigment2/widgets/buttons/elevated_button_widget.dart';
-import 'package:assigment2/widgets/textfields/textfield_widget.dart';
-import '../../../consts/app_colors_strings.dart';
+import 'package:assigment2/res/components/buttons/elevated_button_widget.dart';
+import 'package:assigment2/res/components/textfields/textfield_widget.dart';
+import 'package:assigment2/view_model/auth_provider.dart';
+import '../../../res/consts/app_colors_strings.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/appbar_widget.dart';
-import '../../../consts/app_text_strings.dart';
-import '../../../consts/ui_helper.dart';
-import '../../../consts/app_img_strings.dart';
-import '../../../widgets/textfields/password_textfield.dart';
-import '../../../widgets/rich_text_widget.dart';
-import '../signin/sign_in_screen.dart';
-import '../../../widgets/app_logo_widget.dart';
+import '../../../res/components/appbar_widget.dart';
+import '../../../res/consts/app_text_strings.dart';
+import '../../../res/consts/ui_helper.dart';
+import '../../../res/consts/app_img_strings.dart';
+import '../../../res/components/textfields/password_textfield.dart';
+import '../../../res/components/rich_text_widget.dart';
+import '../../../res/components/app_logo_widget.dart';
 import '../../../api/models/signup_model.dart';
 import '../../../validation/loc_validation.dart';
-import '../../../api/api_service/auth_service.dart';
-import '../dashboard/dashboard_screen.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../utils/routes/routes_name.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
-  static const routename = 'sign-up-screen';
   const SignUpScreen({super.key});
 
   @override
@@ -137,7 +134,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 width: double.infinity,
                                 txt: AppStrings.txtSignUp,
                                 fontSize: 18,
-                                onPressed: onSignUpPressed,
+                                onPressed: () async {
+                                  if (signUpKey.currentState!.validate()) {
+                                    setState(() {
+                                      isLoading = !isLoading;
+                                    });
+                                    signUpKey.currentState!.save();
+                                    await context
+                                        .read<AuthProvider>()
+                                        .signupApi(data, context);
+                                    setState(() {
+                                      isLoading = !isLoading;
+                                    });
+                                  }
+                                },
                               )
                             ],
                           ),
@@ -154,42 +164,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void onSignInPressed() {
-    Navigator.pushNamed(ctx!,RoutesName.login);
+    Navigator.pushNamed(ctx!, RoutesName.login);
   }
 
-  Future<void> onSignUpPressed() async {
-    if (signUpKey.currentState!.validate()) {
-      setState(() {
-        isLoading = !isLoading;
-      });
-      signUpKey.currentState!.save();
-      try {
-        final response = await AuthApiService.signUp(data);
-        if (response == true) {
-          Navigator.pushNamed(ctx!,RoutesName.dashBoaard).then((_) {
-            setState(() {
-              isLoading = !isLoading;
-            });
-          });
-        } else if (response == false) {
-          setState(() {
-            isLoading = !isLoading;
-          });
 
-          Fluttertoast.showToast(
-              msg: 'Unable to sign up',
-              toastLength: Toast.LENGTH_LONG,
-              textColor: AppColors.colorWhite);
-        }
-      } catch (error) {
-        setState(() {
-          isLoading = !isLoading;
-        });
-        Fluttertoast.showToast(
-            msg: error.toString(),
-            toastLength: Toast.LENGTH_LONG,
-            textColor: AppColors.colorWhite);
-      }
-    }
-  }
 }

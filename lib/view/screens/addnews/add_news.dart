@@ -1,15 +1,14 @@
-import 'package:assigment2/view/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/appbar_widget.dart';
-import '../../../consts/app_text_strings.dart';
-import '../../../consts/app_colors_strings.dart';
-import '../../../consts/ui_helper.dart';
-import '../../../widgets/textfields/textfield_widget.dart';
-import '../../../widgets/text_widget.dart';
+import '../../../res/components/appbar_widget.dart';
+import '../../../res/consts/app_text_strings.dart';
+import '../../../res/consts/app_colors_strings.dart';
+import '../../../res/consts/ui_helper.dart';
+import '../../../res/components/textfields/textfield_widget.dart';
+import '../../../res/components/text_widget.dart';
 import './components/botom_sheet_content.dart';
 import '../../../api/api_service/addnews_servics.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../utils/routes/routes_name.dart';
+import '../../../utils/utils.dart';
 
 class AddNewsScreen extends StatefulWidget {
   static const routeName = 'add-news-screen';
@@ -156,19 +155,13 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
         setState(() {
           isLoading = !isLoading;
         });
-        Fluttertoast.showToast(
-            msg: 'Unable to add news',
-            toastLength: Toast.LENGTH_LONG,
-            textColor: AppColors.colorWhite);
+        Utils.showToast('Unable to add news');
       }
     } catch (error) {
       setState(() {
         isLoading = !isLoading;
       });
-      Fluttertoast.showToast(
-          msg: error.toString(),
-          toastLength: Toast.LENGTH_LONG,
-          textColor: AppColors.colorWhite);
+      Utils.showToast(error.toString());
     }
   }
 

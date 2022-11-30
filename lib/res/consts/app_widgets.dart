@@ -1,5 +1,5 @@
 
-import '../widgets/text_widget.dart';
+import '../components/text_widget.dart';
 import './app_colors_strings.dart';
 
 class AppWidgets {

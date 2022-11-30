@@ -1,4 +1,4 @@
-class SignUpResponse {
+class AuthResponse {
   dynamic id;
   String? email;
   String? createdAt;
@@ -19,7 +19,7 @@ class SignUpResponse {
   String? notification;
   dynamic walletCoin;
 
-  SignUpResponse(
+  AuthResponse(
       {this.id,
       this.email,
       this.createdAt,
@@ -40,7 +40,7 @@ class SignUpResponse {
       this.notification,
       this.walletCoin});
 
-  SignUpResponse.fromJson(Map<String, dynamic> json) {
+  AuthResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
     createdAt = json['created_at'];

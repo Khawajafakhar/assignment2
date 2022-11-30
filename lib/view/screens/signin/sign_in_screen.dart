@@ -1,28 +1,23 @@
-import 'package:assigment2/widgets/buttons/elevated_button_widget.dart';
-import '../../../widgets/buttons/text_button.dart';
-import '../../../consts/app_colors_strings.dart';
-import '../../../consts/app_img_strings.dart';
+import 'package:assigment2/res/components/buttons/elevated_button_widget.dart';
+import '../../../res/components/buttons/text_button.dart';
+import '../../../res/consts/app_colors_strings.dart';
+import '../../../res/consts/app_img_strings.dart';
 import 'package:flutter/material.dart';
-import '../../../consts/app_text_strings.dart';
-import '../../../widgets/textfields/textfield_widget.dart';
-import '../../../consts/ui_helper.dart';
-import '../../../widgets/textfields/password_textfield.dart';
+import '../../../res/consts/app_text_strings.dart';
+import '../../../res/components/textfields/textfield_widget.dart';
+import '../../../res/consts/ui_helper.dart';
+import '../../../res/components/textfields/password_textfield.dart';
 import './components/social_accounts.dart';
-import '../../../widgets/rich_text_widget.dart';
-import '../../../widgets/appBar_widget.dart';
-import '../../screens/signup/sign_up_screen.dart';
-import '../../../widgets/app_logo_widget.dart';
-import '../forgot_password/forgot_password_screen.dart';
-import '../dashboard/dashboard_screen.dart';
-import 'package:provider/provider.dart';
-import '../../../api/api_service/auth_service.dart';
+import '../../../res/components/rich_text_widget.dart';
+import '../../../res/components/appBar_widget.dart';
+import '../../../res/components/app_logo_widget.dart';
 import '../../../api/models/signin_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../../validation/loc_validation.dart';
 import '../../../utils/routes/routes_name.dart';
+import '../../../view_model/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
-  static const routeName = 'signin-screen';
   const SignInScreen({super.key});
 
   @override
@@ -38,7 +33,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
   BuildContext? ctx;
   bool isLoading = false;
-  SignInData data = SignInData(email: null, pass: null);
+  SignInData data = SignInData(
+    email: null,
+    pass: null,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +98,20 @@ class _SignInScreenState extends State<SignInScreen> {
                                   width: double.infinity,
                                   txt: AppStrings.txtSignIn,
                                   fontSize: 18,
-                                  onPressed: onSignInPressed,
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      setState(() {
+                                        isLoading = !isLoading;
+                                      });
+                                      formKey.currentState!.save();
+
+                                      await context.read<AuthProvider>().loginApi(
+                                          data, context);
+                                      setState(() {
+                                        isLoading = !isLoading;
+                                      });
+                                    }
+                                  },
                                 )
                               ],
                             ),
@@ -120,44 +131,10 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void onSignUpPressed() {
-    Navigator.pushNamed(ctx!,RoutesName.signUp);
+    Navigator.pushNamed(ctx!, RoutesName.signUp);
   }
 
   void onForgotPressed() {
-    Navigator.pushNamed(ctx!,RoutesName.forgotPassword);
-  }
-
-  void onSignInPressed() async {
-    if (formKey.currentState!.validate()) {
-      setState(() {
-        isLoading = !isLoading;
-      });
-      formKey.currentState!.save();
-      try {
-        final response = await AuthApiService.logIn(data);
-        if (response == true) {
-          await Navigator.pushNamed(ctx!,RoutesName.dashBoaard);
-          setState(() {
-            isLoading = !isLoading;
-          });
-        } else if (response == false) {
-          setState(() {
-            isLoading = !isLoading;
-          });
-          Fluttertoast.showToast(
-              msg: 'Unable to login',
-              toastLength: Toast.LENGTH_LONG,
-              textColor: AppColors.colorWhite);
-        }
-      } catch (error) {
-        setState(() {
-          isLoading = !isLoading;
-        });
-        Fluttertoast.showToast(
-            msg: error.toString(),
-            toastLength: Toast.LENGTH_LONG,
-            textColor: AppColors.colorWhite);
-      }
-    }
+    Navigator.pushNamed(ctx!, RoutesName.forgotPassword);
   }
 }

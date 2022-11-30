@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import '../../consts/api_strings.dart';
+import '../../res/consts/api_strings.dart';
 import 'dart:convert';
 import '../provider/news_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

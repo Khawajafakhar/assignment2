@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../../../consts/app_colors_strings.dart';
-import '../../../../../../../consts/app_img_strings.dart';
+import '../../../../../../../res/consts/app_colors_strings.dart';
+import '../../../../../../../res/consts/app_img_strings.dart';
 
 class FeedImgWidget extends StatelessWidget {
   const FeedImgWidget({super.key});

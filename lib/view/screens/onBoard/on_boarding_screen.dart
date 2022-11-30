@@ -1,10 +1,9 @@
-import 'package:assigment2/consts/app_colors_strings.dart';
-import 'package:assigment2/consts/app_text_strings.dart';
+import 'package:assigment2/res/consts/app_colors_strings.dart';
+import 'package:assigment2/res/consts/app_text_strings.dart';
 import 'package:assigment2/view/screens/onBoard/components/pageview_widget.dart';
 import 'package:flutter/material.dart';
 import '../onBoard/components/page_indicator_widget.dart';
-import '../../../widgets/buttons/elevated_button_widget.dart';
-import '../signin/sign_in_screen.dart';
+import '../../../res/components/buttons/elevated_button_widget.dart';
 import '../../../utils/routes/routes_name.dart';
 
 class OnBoardingScreen extends StatelessWidget {

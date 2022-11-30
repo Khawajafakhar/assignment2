@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../consts/app_colors_strings.dart';
-import '../../../../consts/ui_helper.dart';
+import '../../../../res/consts/app_colors_strings.dart';
+import '../../../../res/consts/ui_helper.dart';
 import './list_tile_widget.dart';
 import './check_box_widget.dart';
 import '../../../../api/provider/selectmatch_provider.dart';

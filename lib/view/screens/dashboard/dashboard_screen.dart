@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/appbar_widget.dart';
-import '../../../widgets/bottom_appbar_widget.dart';
+import '../../../res/components/appbar_widget.dart';
+import '../../../res/components/bottom_appbar_widget.dart';
 import 'bottom_Navigation_pages/fixture_page.dart';
 import 'bottom_Navigation_pages/home_page.dart';
 import 'bottom_Navigation_pages/leader_page.dart';
 import 'bottom_Navigation_pages/news_page/news_page.dart';
 import 'bottom_Navigation_pages/settings_page.dart';
-import '../../../widgets/drawer/drawer_widget.dart';
+import '../../../res/components/drawer/drawer_widget.dart';
 
 class DashBoardScreen extends StatefulWidget {
-  static const routeName = 'dashboard-screen';
  const DashBoardScreen({super.key});
 
   @override

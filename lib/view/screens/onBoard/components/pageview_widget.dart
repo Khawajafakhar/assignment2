@@ -1,4 +1,4 @@
-import 'package:assigment2/consts/app_img_strings.dart';
+import 'package:assigment2/res/consts/app_img_strings.dart';
 import 'package:flutter/material.dart';
 import 'onboard_widget.dart';
 

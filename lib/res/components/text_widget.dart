@@ -1,4 +1,4 @@
-import 'package:assigment2/consts/fonts.dart';
+import 'package:assigment2/res/consts/fonts.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {

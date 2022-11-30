@@ -2,7 +2,7 @@ import 'package:assigment2/api/models/all_news_response_model.dart';
 import 'package:flutter/material.dart';
 import 'news_widgets.dart/news_card_widget.dart';
 import '../../../../../../api/api_service/get_allnews_service.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import '../../../../../../utils/utils.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -30,9 +30,7 @@ class _FeedPageState extends State<FeedPage> {
     if (feedData != null) {
       feedList = feedData;
     } else {
-      Fluttertoast.showToast(
-        msg: 'not working',
-      );
+      Utils.showToast('unable to load data');
     }
   }
 

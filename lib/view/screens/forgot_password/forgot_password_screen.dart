@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/appbar_widget.dart';
-import '../../../consts/app_text_strings.dart';
-import '../../../consts/app_colors_strings.dart';
-import '../../../consts/ui_helper.dart';
-import '../../../widgets/app_logo_widget.dart';
-import '../../../widgets/text_widget.dart';
-import '../../../widgets/textfields/textfield_widget.dart';
-import '../../../consts/app_img_strings.dart';
-import '../../../widgets/buttons/elevated_button_widget.dart';
-import '../../../widgets/rich_text_widget.dart';
-import '../../screens/resetpassword/reset_pass_screen.dart';
-import '../signup/sign_up_screen.dart';
+import '../../../res/components/appbar_widget.dart';
+import '../../../res/consts/app_text_strings.dart';
+import '../../../res/consts/app_colors_strings.dart';
+import '../../../res/consts/ui_helper.dart';
+import '../../../res/components/app_logo_widget.dart';
+import '../../../res/components/text_widget.dart';
+import '../../../res/components/textfields/textfield_widget.dart';
+import '../../../res/consts/app_img_strings.dart';
+import '../../../res/components/buttons/elevated_button_widget.dart';
+import '../../../res/components/rich_text_widget.dart';
 import '../../../validation/loc_validation.dart';
 import '../../../api/api_service/auth_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../utils/routes/routes_name.dart';
+import '../../../utils/utils.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  static const routeName = 'forgot-pass-screen';
   const ForgotPasswordScreen({super.key});
 
   @override
@@ -108,10 +106,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           setState(() {
             isLoading = !isLoading;
           });
-          Fluttertoast.showToast(
-              msg: 'Unable to reset pass',
-              toastLength: Toast.LENGTH_LONG,
-              textColor: AppColors.colorWhite);
+          Utils.showToast('unable to reset password');
         }
       });
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../consts/app_colors_strings.dart';
-import '../../../../widgets/text_widget.dart';
+import '../../../../res/consts/app_colors_strings.dart';
+import '../../../../res/components/text_widget.dart';
 
 class ListTileWidget extends StatelessWidget {
   const ListTileWidget(

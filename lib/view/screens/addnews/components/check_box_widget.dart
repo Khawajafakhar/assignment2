@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../consts/app_colors_strings.dart';
+import '../../../../res/consts/app_colors_strings.dart';
 
 class CheckBoxWidget extends StatefulWidget {
   const CheckBoxWidget({super.key, this.matchId});

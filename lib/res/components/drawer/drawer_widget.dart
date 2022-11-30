@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import '../../consts/app_colors_strings.dart';
 import 'components/profile_img.dart';
 import '../../consts/ui_helper.dart';
-import '../../widgets/text_widget.dart';
+import '../../components/text_widget.dart';
 import './components/list_tile_widget.dart';
 import '../../consts/app_img_strings.dart';
 import '../../consts/app_text_strings.dart';
 import '../gradients/icon_label_gradient.dart';
 import '../../consts/app_widgets.dart';
-import '../../api/api_service/auth_service.dart';
-import '../../view/screens/signin/sign_in_screen.dart';
-import '../../utils/routes/routes_name.dart';
+import '../../../../api/api_service/auth_service.dart';
+import '../../../../utils/routes/routes_name.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});

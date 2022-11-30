@@ -12,6 +12,7 @@ import './api/provider/selectmatch_provider.dart';
 import 'view/screens/dashboard/bottom_Navigation_pages/news_page/news_page.dart';
 import 'api/api_service/auth_service.dart';
 import './utils/routes/routes.dart';
+import './view_model/auth_provider.dart';
 
 
 void main() {
@@ -25,40 +26,43 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SelectMatchProvider(),
-      child: MaterialApp(
-        title: 'Assignment 2',
-        
-        home: FutureBuilder(
-          future: AuthApiService.tryAutoLogin(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              if (snapshot.data == true) {
-                return const DashBoardScreen();
+    return MultiProvider(
+      providers: [ChangeNotifierProvider<SelectMatchProvider>(
+        create: (context) => SelectMatchProvider(),),
+        ChangeNotifierProvider<AuthProvider>(
+        create: (context) => AuthProvider(),),],
+        child: MaterialApp(
+          title: 'Assignment 2',
+          home: FutureBuilder(
+            future: AuthApiService.tryAutoLogin(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               } else {
-                return OnBoardingScreen();
+                if (snapshot.data == true) {
+                  return const DashBoardScreen();
+                } else {
+                  return OnBoardingScreen();
+                }
               }
-            }
-          },
+            },
+          ),
+          onGenerateRoute: Routes.generateRoutes,
+    
+          // routes: {
+          //   SignInScreen.routeName: (context) => const SignInScreen(),
+          //   SignUpScreen.routename: (context) => const SignUpScreen(),
+          //   ForgotPasswordScreen.routeName: (context) =>
+          //       const ForgotPasswordScreen(),
+          //   ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
+          //   DashBoardScreen.routeName: (context) => const DashBoardScreen(),
+          //   AddNewsScreen.routeName: (context) => const AddNewsScreen(),
+          //   NewsPage.routeName: (context) => const NewsPage(),
+          // },
         ),
-        onGenerateRoute: Routes.generateRoutes,
-
-        // routes: {
-        //   SignInScreen.routeName: (context) => const SignInScreen(),
-        //   SignUpScreen.routename: (context) => const SignUpScreen(),
-        //   ForgotPasswordScreen.routeName: (context) =>
-        //       const ForgotPasswordScreen(),
-        //   ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
-        //   DashBoardScreen.routeName: (context) => const DashBoardScreen(),
-        //   AddNewsScreen.routeName: (context) => const AddNewsScreen(),
-        //   NewsPage.routeName: (context) => const NewsPage(),
-        // },
-      ),
-    );
+      );
+    
   }
 }

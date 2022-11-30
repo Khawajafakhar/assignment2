@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../consts/app_img_strings.dart';
-import '../../../../../consts/app_colors_strings.dart';
-import '../../../../../widgets/buttons/floating_button_widget.dart';
+import '../../../../../res/consts/app_img_strings.dart';
+import '../../../../../res/consts/app_colors_strings.dart';
+import '../../../../../res/components/buttons/floating_button_widget.dart';
 import 'components/news_widgets.dart/tabbar_widget.dart';
 import 'components/approvals_page.dart';
 import 'components/feed_page.dart';

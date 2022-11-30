@@ -6,7 +6,10 @@ import '../../app_exceptions.dart';
 
 class NetworkApiService extends BaseApiService {
   @override
-  Future getGetApiResponse(header, String url) async {
+  Future getGetApiResponse(
+    header,
+    String url,
+  ) async {
     dynamic jsonResponse;
     try {
       final response = await http.get(Uri.parse(url));
@@ -18,7 +21,7 @@ class NetworkApiService extends BaseApiService {
   }
 
   @override
-  Future getPostApiResponse(header, String url, body) async {
+  Future getPostApiResponse(String url, body, {header}) async {
     dynamic jsonResponse;
     try {
       final response = await http.post(
@@ -44,6 +47,8 @@ class NetworkApiService extends BaseApiService {
       case 401:
         throw UnathorizedException(message: response.body.toString());
       case 422:
+        throw BadDataException(message: response.body.toString());
+      case 404:
         throw BadDataException(message: response.body.toString());
       default:
         throw FetchDataException(

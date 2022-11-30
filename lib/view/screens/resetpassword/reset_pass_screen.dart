@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/appbar_widget.dart';
-import '../../../consts/app_text_strings.dart';
-import '../../../consts/app_colors_strings.dart';
-import '../../../widgets/app_logo_widget.dart';
-import '../../../consts/ui_helper.dart';
-import '../../../widgets/text_widget.dart';
-import '../../../widgets/textfields/password_textfield.dart';
-import '../../../widgets/buttons/elevated_button_widget.dart';
-import '../../../widgets/rich_text_widget.dart';
-import '../signin/sign_in_screen.dart';
+import '../../../res/components/appbar_widget.dart';
+import '../../../res/consts/app_text_strings.dart';
+import '../../../res/consts/app_colors_strings.dart';
+import '../../../res/components/app_logo_widget.dart';
+import '../../../res/consts/ui_helper.dart';
+import '../../../res/components/text_widget.dart';
+import '../../../res/components/textfields/password_textfield.dart';
+import '../../../res/components/buttons/elevated_button_widget.dart';
+import '../../../res/components/rich_text_widget.dart';
+import '../../../utils/routes/routes_name.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-  static const routeName = 'resetpass-screen';
   ResetPasswordScreen({super.key});
   final TextEditingController passController = TextEditingController();
   final TextEditingController cnfrmPassController = TextEditingController();
@@ -88,6 +87,6 @@ class ResetPasswordScreen extends StatelessWidget {
   }
 
   void onSignInPressed() {
-    Navigator.of(ctx!).popAndPushNamed(SignInScreen.routeName);
+    Navigator.popAndPushNamed(ctx!,RoutesName.login);
   }
 }

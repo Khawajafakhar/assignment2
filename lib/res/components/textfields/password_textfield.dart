@@ -1,4 +1,4 @@
-import 'package:assigment2/consts/app_colors_strings.dart';
+import 'package:assigment2/res/consts/app_colors_strings.dart';
 import 'package:flutter/material.dart';
 import './textfield_widget.dart';
 

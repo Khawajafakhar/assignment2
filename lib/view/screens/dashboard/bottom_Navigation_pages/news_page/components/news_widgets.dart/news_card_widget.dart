@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../../../consts/app_colors_strings.dart';
+import '../../../../../../../res/consts/app_colors_strings.dart';
 import './feed_img_widget.dart';
-import '../../../../../../../widgets/text_widget.dart';
+import '../../../../../../../res/components/text_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsCardWidget extends StatelessWidget {

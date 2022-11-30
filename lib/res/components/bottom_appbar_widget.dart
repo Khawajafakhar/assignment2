@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../consts/app_colors_strings.dart';
-import '../widgets/text_widget.dart';
+import '../components/text_widget.dart';
 import '../consts/app_text_strings.dart';
 import 'gradients/icon_label_gradient.dart';
 

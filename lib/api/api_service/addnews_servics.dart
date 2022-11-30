@@ -1,8 +1,8 @@
-import 'package:assigment2/api/models/signup_response_model.dart';
+import 'package:assigment2/api/models/auth_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../consts/api_strings.dart';
+import '../../res/consts/api_strings.dart';
 
 class AddNewsService {
   static Future<bool> addNews(
@@ -15,7 +15,7 @@ class AddNewsService {
     }
     final prefsData =
         jsonDecode(prefs.getString('signUpResponse')!) as Map<String, dynamic>;
-    SignUpResponse userdata = SignUpResponse.fromJson(prefsData);
+    AuthResponse userdata = AuthResponse.fromJson(prefsData);
 
     final mapData = jsonEncode({
       "news": {
