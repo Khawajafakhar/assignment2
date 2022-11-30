@@ -1,3 +1,4 @@
+import 'package:assigment2/view_model/auth_provider.dart';
 import 'package:flutter/material.dart';
 import '../../../res/components/appbar_widget.dart';
 import '../../../res/consts/app_text_strings.dart';
@@ -14,6 +15,7 @@ import '../../../api/api_service/auth_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../utils/routes/routes_name.dart';
 import '../../../utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -74,7 +76,23 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           width: double.infinity,
                           txt: AppStrings.txtResetPass,
                           fontSize: 18,
-                          onPressed: onResetPassPressed,
+                          onPressed: () async {
+                            if (resetFormKey.currentState!.validate()) {
+                              setState(() {
+                                isLoading = !isLoading;
+                              });
+                              email = emailcont.text;
+                              await context
+                                  .read<AuthViewProvider>()
+                                  .forgotPasswordApi(
+                                    email,
+                                    context,
+                                  );
+                              setState(() {
+                                isLoading = !isLoading;
+                              });
+                            }
+                          },
                         ),
                         UiHelper.verticalLarge,
                         RichTextWidget(
@@ -89,30 +107,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ));
   }
 
-  void onResetPassPressed() async {
-    if (resetFormKey.currentState!.validate()) {
-      setState(() {
-        isLoading = !isLoading;
-      });
-      email = emailcont.text;
-      await AuthApiService.forgotPassword(email!).then((response) {
-        if (response == true) {
-          setState(() {
-            isLoading = !isLoading;
-          });
+  // void onResetPassPressed() async {
+  //   if (resetFormKey.currentState!.validate()) {
+  //     setState(() {
+  //       isLoading = !isLoading;
+  //     });
+  //     email = emailcont.text;
+  //     await AuthApiService.forgotPassword(email!).then((response) {
+  //       if (response == true) {
+  //         setState(() {
+  //           isLoading = !isLoading;
+  //         });
 
-          Navigator.pushNamed(ctx!,RoutesName.resetPassword);
-        } else {
-          setState(() {
-            isLoading = !isLoading;
-          });
-          Utils.showToast('unable to reset password');
-        }
-      });
-    }
-  }
+  //         Navigator.pushNamed(ctx!, RoutesName.resetPassword);
+  //       } else {
+  //         setState(() {
+  //           isLoading = !isLoading;
+  //         });
+  //         Utils.showToast('unable to reset password');
+  //       }
+  //     });
+  //   }
+  // }
 
   void onSignUpPressed() {
-    Navigator.pushNamed(ctx!,RoutesName.signUp);
+    Navigator.pushNamed(ctx!, RoutesName.signUp);
   }
 }

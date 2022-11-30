@@ -9,27 +9,21 @@ import 'dart:convert';
 class AuthRepository {
   BaseApiService apiService = NetworkApiService();
 
-  Future<void> authService(
-    dynamic data,
-    String url
-  ) async {
+  Future<void> authService(dynamic data, String url) async {
     final prefs = await SharedPreferences.getInstance();
     try {
-      // var mapData = {
-      //   "email": data.email,
-      //   "password": data.pass,
-      // };
-    final response=  await apiService.getPostApiResponse( url, data);
-     AuthResponse authResponse = AuthResponse.fromJson(response);
-     Map<String, dynamic> userData = authResponse.toJson();
-        String jsonString = jsonEncode(userData);
-        prefs.setString('signUpResponse', jsonString);
+      final response = await apiService.getPostApiResponse(url, data);
+
+      AuthResponse authResponse = AuthResponse.fromJson(response);
+      Map<String, dynamic> userData = authResponse.toJson();
+      String jsonString = jsonEncode(userData);
+      prefs.setString('signUpResponse', jsonString);
     } catch (e) {
       rethrow;
     }
   }
 
-   Future<void> signUp(dynamic data) async {
+  Future<void> signUp(dynamic data) async {
     var mapData = {
       "user[email]": data.email,
       "user[first_name]": data.firstName,
@@ -38,15 +32,23 @@ class AuthRepository {
       "user[password_confirmation]": data.cnfrmPass
     };
 
-  await authService(mapData,ApiStrings.signUpUrl);
+    await authService(mapData, ApiStrings.signUpUrl);
   }
 
-   Future<void> logIn(dynamic data) async {
+  Future<void> logIn(dynamic data) async {
     var mapData = {
       "email": data.email,
       "password": data.pass,
     };
 
-    await authService(mapData,ApiStrings.loginUrl);
+    await authService(mapData, ApiStrings.loginUrl);
+  }
+
+  Future<dynamic> forgotPassword(dynamic data) async {
+    
+      final response = await apiService.getPutApiResponse(ApiStrings.forgotPassUrl,{
+      "email": data 
+    });
+    return response;
   }
 }

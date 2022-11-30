@@ -141,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     });
                                     signUpKey.currentState!.save();
                                     await context
-                                        .read<AuthProvider>()
+                                        .read<AuthViewProvider>()
                                         .signupApi(data, context);
                                     setState(() {
                                       isLoading = !isLoading;

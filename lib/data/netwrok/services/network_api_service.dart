@@ -26,7 +26,6 @@ class NetworkApiService extends BaseApiService {
     try {
       final response = await http.post(
         Uri.parse(url),
-        headers: header,
         body: body,
       );
       jsonResponse = retrunJson(response);
@@ -35,6 +34,24 @@ class NetworkApiService extends BaseApiService {
     }
     return jsonResponse;
   }
+
+
+  @override
+  Future getPutApiResponse(String url, body) async{
+    dynamic jsonResponse;
+     try {
+      final response = await http.put(
+        Uri.parse(url),
+        body: body,
+      );
+      jsonResponse = retrunJson(response);
+    } on SocketException {
+      return FetchDataException(message: 'No Internet');
+    }
+    return jsonResponse;
+  }
+
+
 
   dynamic retrunJson(http.Response response) {
     switch (response.statusCode) {
@@ -45,11 +62,11 @@ class NetworkApiService extends BaseApiService {
         dynamic decoded = json.decode(response.body);
         return decoded;
       case 401:
-        throw UnathorizedException(message: response.body.toString());
+        throw UnathorizedException(message: response.statusCode.toString());
       case 422:
         throw BadDataException(message: response.body.toString());
       case 404:
-        throw BadDataException(message: response.body.toString());
+        throw BadDataException(message: response.statusCode.toString());
       default:
         throw FetchDataException(
             message:

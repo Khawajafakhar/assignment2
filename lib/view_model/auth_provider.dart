@@ -3,7 +3,7 @@ import '../repository/auth_repository.dart';
 import '../utils/utils.dart';
 import '../utils/routes/routes_name.dart';
 
-class AuthProvider with ChangeNotifier {
+class AuthViewProvider with ChangeNotifier {
   AuthRepository authRepo = AuthRepository();
 
  
@@ -34,6 +34,22 @@ class AuthProvider with ChangeNotifier {
           Navigator.pushNamed(context, RoutesName.dashBoaard);
         })
         .onError((error, stackTrace) {
+          Utils.showToast(error.toString());
+        });
+  }
+
+    Future<void> forgotPasswordApi(
+    dynamic data,
+    BuildContext context,
+  ) async {
+    await authRepo
+        .forgotPassword(data)
+        .then((value) {
+          Utils.showToast(value.toString());
+          Navigator.pushNamed(context, RoutesName.resetPassword);
+        })
+        .onError((error, stackTrace) {
+          print(error.toString());
           Utils.showToast(error.toString());
         });
   }

@@ -105,7 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       });
                                       formKey.currentState!.save();
 
-                                      await context.read<AuthProvider>().loginApi(
+                                      await context.read<AuthViewProvider>().loginApi(
                                           data, context);
                                       setState(() {
                                         isLoading = !isLoading;
