@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../repository/auth_repository.dart';
 import '../utils/utils.dart';
 import '../utils/routes/routes_name.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthViewProvider with ChangeNotifier {
   AuthRepository authRepo = AuthRepository();
@@ -49,9 +50,26 @@ class AuthViewProvider with ChangeNotifier {
           Navigator.pushNamed(context, RoutesName.resetPassword);
         })
         .onError((error, stackTrace) {
-          print(error.toString());
           Utils.showToast(error.toString());
         });
+  }
+
+
+   Future<void> logOut(BuildContext context,) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear().then((_) {
+      Utils.showToast('Logout');
+      Navigator.pushReplacementNamed(context, RoutesName.login);
+    });
+  }
+
+   Future<bool> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('signUpResponse')) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   

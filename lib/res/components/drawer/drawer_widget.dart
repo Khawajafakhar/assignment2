@@ -1,3 +1,4 @@
+import 'package:assigment2/view_model/auth_provider.dart';
 import 'package:flutter/material.dart';
 import '../../consts/app_colors_strings.dart';
 import 'components/profile_img.dart';
@@ -8,8 +9,7 @@ import '../../consts/app_img_strings.dart';
 import '../../consts/app_text_strings.dart';
 import '../gradients/icon_label_gradient.dart';
 import '../../consts/app_widgets.dart';
-import '../../../../api/api_service/auth_service.dart';
-import '../../../../utils/routes/routes_name.dart';
+import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -58,9 +58,7 @@ class DrawerWidget extends StatelessWidget {
                   txt: AppStrings.logOutTxt,
                   gradient: AppColors.yellowishGradient2,
                   onTap: () async {
-                    await AuthApiService.logOut().then((value) =>
-                        Navigator
-                            .pushReplacementNamed(context,RoutesName.login));
+                    await context.read<AuthViewProvider>().logOut(context);
                   },
                 ),
               ),
