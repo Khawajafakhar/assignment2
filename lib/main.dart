@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'view_model/selectmatch_provider.dart';
 import './utils/routes/routes.dart';
 import './view_model/auth_provider.dart';
+import './view_model/news_view_provider.dart';
 
 void main() {
   FlutterNativeSplash.remove();
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AuthViewProvider>(
           create: (context) => AuthViewProvider(),
+        ),
+        ChangeNotifierProvider<NewsViewProvider>(
+          create: (context) => NewsViewProvider(),
         ),
       ],
       child: MaterialApp(

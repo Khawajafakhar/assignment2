@@ -1,4 +1,4 @@
-import '../api/models/selectmatch_model.dart';
+import '../models/selectmatch_model.dart';
 import '../res/consts/app_img_strings.dart';
 import 'package:flutter/material.dart';
 

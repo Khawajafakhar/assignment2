@@ -3,7 +3,7 @@ import 'package:assigment2/data/netwrok/services/network_api_service.dart';
 import '../data/netwrok/base_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../res/consts/api_strings.dart';
-import '../api/models/auth_response_model.dart';
+import '../models/auth_response_model.dart';
 import 'dart:convert';
 
 class AuthRepository {
@@ -17,11 +17,13 @@ class AuthRepository {
       AuthResponse authResponse = AuthResponse.fromJson(response);
       Map<String, dynamic> userData = authResponse.toJson();
       String jsonString = jsonEncode(userData);
-      prefs.setString('signUpResponse', jsonString);
-    } catch (e) {
+      prefs.setString('userData', jsonString);
+    } catch (_) {
       rethrow;
     }
   }
+
+
 
   Future<void> signUp(dynamic data) async {
     var mapData = {
@@ -35,6 +37,8 @@ class AuthRepository {
     await authService(mapData, ApiStrings.signUpUrl);
   }
 
+
+
   Future<void> logIn(dynamic data) async {
     var mapData = {
       "email": data.email,
@@ -43,6 +47,9 @@ class AuthRepository {
 
     await authService(mapData, ApiStrings.loginUrl);
   }
+
+
+
 
   Future<dynamic> forgotPassword(dynamic data) async {
     

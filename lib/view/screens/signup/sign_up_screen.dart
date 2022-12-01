@@ -10,8 +10,8 @@ import '../../../res/consts/app_img_strings.dart';
 import '../../../res/components/textfields/password_textfield.dart';
 import '../../../res/components/rich_text_widget.dart';
 import '../../../res/components/app_logo_widget.dart';
-import '../../../api/models/signup_model.dart';
-import '../../../validation/loc_validation.dart';
+import '../../../models/signup_model.dart';
+import '../../../utils/validation/loc_validation.dart';
 import '../../../utils/routes/routes_name.dart';
 import 'package:provider/provider.dart';
 
@@ -52,84 +52,79 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Scaffold(
           backgroundColor: AppColors.backGroundColor,
           appBar: const AppBarWidget(txt: AppStrings.txtSignUp),
-          body: isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                  children: [
-                    UiHelper.verticalMedium,
-                    const AppLogoWidget(),
-                    UiHelper.verticalSmall1,
-                    Form(
-                        key: signUpKey,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                          child: Column(
-                            children: [
-                              TextFieldWidget(
-                                onFieldSubmitted: (value) =>
-                                    FocusScope.of(context)
-                                        .requestFocus(emailFocus),
-                                validator: (val) =>
-                                    Validation.isUserNameValid(val!),
-                                onSave: (val) {
-                                  var splitted = val!.split(' ');
-                                  data.firstName = splitted[0];
-                                  data.lastname = splitted[1];
-                                },
-                                textController: nameController,
-                                inputAction: TextInputAction.next,
-                                hint: AppStrings.hintTxtName,
-                                prefix: Image.asset(AppImages.imgIconUser),
-                                inputType: TextInputType.text,
-                              ),
-                              UiHelper.verticalXSmall,
-                              TextFieldWidget(
-                                focusNode: emailFocus,
-                                onFieldSubmitted: (value) =>
-                                    FocusScope.of(context)
-                                        .requestFocus(passFocus),
-                                validator: (val) =>
-                                    Validation.isEmailValid(val!),
-                                onSave: (val) => data.email = val,
-                                textController: emailController,
-                                inputAction: TextInputAction.next,
-                                hint: AppStrings.hintTxtEmail,
-                                prefix: Image.asset(AppImages.imgEmailIcon),
-                                inputType: TextInputType.emailAddress,
-                              ),
-                              UiHelper.verticalXSmall,
-                              PasswordTextField(
-                                focusNode: passFocus,
-                                onFieldSubmitted: (value) =>
-                                    FocusScope.of(context)
-                                        .requestFocus(cnfrmPassFocus),
-                                validator: (val) =>
-                                    Validation.isPasswordValid(val!),
-                                onSave: (val) => data.pass = val,
-                                controller: passController,
-                                hint: AppStrings.hintTxtPass,
-                                inputAction: TextInputAction.next,
-                                inputType: TextInputType.visiblePassword,
-                              ),
-                              UiHelper.verticalXSmall,
-                              PasswordTextField(
-                                focusNode: cnfrmPassFocus,
-                                onFieldSubmitted: (value) =>
-                                    FocusScope.of(context).unfocus(),
-                                validator: (val) =>
-                                    Validation.isCnfrmPasswordValid(
-                                        val!, passController),
-                                onSave: (val) => data.cnfrmPass = val,
-                                controller: cnfrmPassController,
-                                hint: AppStrings.hintTxtCnfrmPass,
-                                inputAction: TextInputAction.done,
-                                inputType: TextInputType.visiblePassword,
-                              ),
-                              UiHelper.verticalSmall,
-                              ButtonWidget(
+          body: SingleChildScrollView(
+              child: Column(
+            children: [
+              UiHelper.verticalMedium,
+              const AppLogoWidget(),
+              UiHelper.verticalSmall1,
+              Form(
+                  key: signUpKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Column(
+                      children: [
+                        TextFieldWidget(
+                          onFieldSubmitted: (value) =>
+                              FocusScope.of(context).requestFocus(emailFocus),
+                          validator: (val) => Validation.isUserNameValid(val!),
+                          onSave: (val) {
+                            var splitted = val!.split(' ');
+                            data.firstName = splitted[0];
+                            data.lastname = splitted[1];
+                          },
+                          textController: nameController,
+                          inputAction: TextInputAction.next,
+                          hint: AppStrings.hintTxtName,
+                          prefix: Image.asset(AppImages.imgIconUser),
+                          inputType: TextInputType.text,
+                        ),
+                        UiHelper.verticalXSmall,
+                        TextFieldWidget(
+                          focusNode: emailFocus,
+                          onFieldSubmitted: (value) =>
+                              FocusScope.of(context).requestFocus(passFocus),
+                          validator: (val) => Validation.isEmailValid(val!),
+                          onSave: (val) => data.email = val,
+                          textController: emailController,
+                          inputAction: TextInputAction.next,
+                          hint: AppStrings.hintTxtEmail,
+                          prefix: Image.asset(AppImages.imgEmailIcon),
+                          inputType: TextInputType.emailAddress,
+                        ),
+                        UiHelper.verticalXSmall,
+                        PasswordTextField(
+                          focusNode: passFocus,
+                          onFieldSubmitted: (value) => FocusScope.of(context)
+                              .requestFocus(cnfrmPassFocus),
+                          validator: (val) => Validation.isPasswordValid(val!),
+                          onSave: (val) => data.pass = val,
+                          controller: passController,
+                          hint: AppStrings.hintTxtPass,
+                          inputAction: TextInputAction.next,
+                          inputType: TextInputType.visiblePassword,
+                        ),
+                        UiHelper.verticalXSmall,
+                        PasswordTextField(
+                          focusNode: cnfrmPassFocus,
+                          onFieldSubmitted: (value) =>
+                              FocusScope.of(context).unfocus(),
+                          validator: (val) => Validation.isCnfrmPasswordValid(
+                              val!, passController),
+                          onSave: (val) => data.cnfrmPass = val,
+                          controller: cnfrmPassController,
+                          hint: AppStrings.hintTxtCnfrmPass,
+                          inputAction: TextInputAction.done,
+                          inputType: TextInputType.visiblePassword,
+                        ),
+                        UiHelper.verticalSmall,
+                        isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.colorWhite,
+                                ),
+                              )
+                            : ButtonWidget(
                                 height: 40,
                                 width: double.infinity,
                                 txt: AppStrings.txtSignUp,
@@ -149,23 +144,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   }
                                 },
                               )
-                            ],
-                          ),
-                        )),
-                    UiHelper.verticalMedium,
-                    RichTextWidget(
-                      txt: AppStrings.haveAccTxt,
-                      txt2: AppStrings.txtSignIn,
-                      onPressed: onSignInPressed,
+                      ],
                     ),
-                  ],
-                )),
+                  )),
+              UiHelper.verticalMedium,
+              RichTextWidget(
+                txt: AppStrings.haveAccTxt,
+                txt2: AppStrings.txtSignIn,
+                onPressed: onSignInPressed,
+              ),
+            ],
+          )),
         ));
   }
 
   void onSignInPressed() {
     Navigator.pushNamed(ctx!, RoutesName.login);
   }
-
-
 }

@@ -6,18 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthViewProvider with ChangeNotifier {
   AuthRepository authRepo = AuthRepository();
-
+  bool isLoading = false;
  
 
   Future<void> loginApi(
     dynamic data,
     BuildContext context,
   ) async {
-    await authRepo
+     authRepo
         .logIn(data)
-        .then((value) {
+        .then((_) {
           Utils.showToast('Login Successful');
           Navigator.pushNamed(context, RoutesName.dashBoaard);
+          isLoading = false;
         })
         .onError((error, stackTrace) {
           Utils.showToast(error.toString());
@@ -58,14 +59,14 @@ class AuthViewProvider with ChangeNotifier {
    Future<void> logOut(BuildContext context,) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear().then((_) {
-      Utils.showToast('Logout');
       Navigator.pushReplacementNamed(context, RoutesName.login);
+      Utils.showToast('Logout');
     });
   }
 
    Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('signUpResponse')) {
+    if (!prefs.containsKey('userData')) {
       return false;
     } else {
       return true;

@@ -10,7 +10,7 @@ import '../../../res/components/textfields/textfield_widget.dart';
 import '../../../res/consts/app_img_strings.dart';
 import '../../../res/components/buttons/elevated_button_widget.dart';
 import '../../../res/components/rich_text_widget.dart';
-import '../../../validation/loc_validation.dart';
+import '../../../utils/validation/loc_validation.dart';
 import '../../../utils/routes/routes_name.dart';
 import 'package:provider/provider.dart';
 
@@ -38,37 +38,39 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         child: Scaffold(
           backgroundColor: AppColors.backGroundColor,
           appBar: const AppBarWidget(txt: AppStrings.txtForgotPass),
-          body: isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Column(
-                      children: [
-                        UiHelper.verticalMedium,
-                        const AppLogoWidget(),
-                        UiHelper.verticalSmall1,
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextWidget(
-                            txt: AppStrings.txtForgotScreen,
-                            textAlign: TextAlign.center,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                children: [
+                  UiHelper.verticalMedium,
+                  const AppLogoWidget(),
+                  UiHelper.verticalSmall1,
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: TextWidget(
+                      txt: AppStrings.txtForgotScreen,
+                      textAlign: TextAlign.center,
+                      color: AppColors.colorWhite,
+                    ),
+                  ),
+                  UiHelper.verticalSmall1,
+                  Form(
+                      key: resetFormKey,
+                      child: TextFieldWidget(
+                        textController: emailcont,
+                        prefix: Image.asset(AppImages.imgEmailIcon),
+                        hint: AppStrings.hintTxtEmailOrPhone,
+                        validator: (val) => Validation.isEmailValid(val!),
+                      )),
+                  UiHelper.verticalSmall1,
+                  isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
                             color: AppColors.colorWhite,
                           ),
-                        ),
-                        UiHelper.verticalSmall1,
-                        Form(
-                            key: resetFormKey,
-                            child: TextFieldWidget(
-                              textController: emailcont,
-                              prefix: Image.asset(AppImages.imgEmailIcon),
-                              hint: AppStrings.hintTxtEmailOrPhone,
-                              validator: (val) => Validation.isEmailValid(val!),
-                            )),
-                        UiHelper.verticalSmall1,
-                        ButtonWidget(
+                        )
+                      : ButtonWidget(
                           height: 40,
                           width: double.infinity,
                           txt: AppStrings.txtResetPass,
@@ -91,41 +93,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             }
                           },
                         ),
-                        UiHelper.verticalLarge,
-                        RichTextWidget(
-                          txt: AppStrings.txtNewAcc,
-                          txt2: AppStrings.txtSignUp,
-                          onPressed: onSignUpPressed,
-                        ),
-                      ],
-                    ),
+                  UiHelper.verticalLarge,
+                  RichTextWidget(
+                    txt: AppStrings.txtNewAcc,
+                    txt2: AppStrings.txtSignUp,
+                    onPressed: onSignUpPressed,
                   ),
-                ),
+                ],
+              ),
+            ),
+          ),
         ));
   }
-
-  // void onResetPassPressed() async {
-  //   if (resetFormKey.currentState!.validate()) {
-  //     setState(() {
-  //       isLoading = !isLoading;
-  //     });
-  //     email = emailcont.text;
-  //     await AuthApiService.forgotPassword(email!).then((response) {
-  //       if (response == true) {
-  //         setState(() {
-  //           isLoading = !isLoading;
-  //         });
-
-  //         Navigator.pushNamed(ctx!, RoutesName.resetPassword);
-  //       } else {
-  //         setState(() {
-  //           isLoading = !isLoading;
-  //         });
-  //         Utils.showToast('unable to reset password');
-  //       }
-  //     });
-  //   }
-  // }
 
   void onSignUpPressed() {
     Navigator.pushNamed(ctx!, RoutesName.signUp);

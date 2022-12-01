@@ -1,8 +1,8 @@
-import 'package:assigment2/api/models/all_news_response_model.dart';
+import 'package:assigment2/models/all_news_response_model.dart';
 import 'package:flutter/material.dart';
 import 'news_widgets.dart/news_card_widget.dart';
-import '../../../../../../api/api_service/get_allnews_service.dart';
-import '../../../../../../utils/utils.dart';
+import 'package:provider/provider.dart';
+import '../../../../../../view_model/news_view_provider.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -12,31 +12,24 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<AllNewsModel> feedList = [];
   bool isLoading = true;
   @override
   void didChangeDependencies() async {
     if (isLoading) {
-      await getList();
+      await Provider.of<NewsViewProvider>(context, listen: false)
+          .getAllNewsApi()
+          .then((_) {
+        setState(() {
+          isLoading = !isLoading;
+        });
+      });
     }
-    setState(() {
-      isLoading = !isLoading;
-    });
     super.didChangeDependencies();
-  }
-
-  Future<void> getList() async {
-    final feedData = await GetAllNewsService.getAllNews();
-    if (feedData != null) {
-      feedList = feedData;
-    } else {
-      Utils.showToast('unable to load data');
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-
+    List<AllNewsModel> feedList = context.watch<NewsViewProvider>().getNews;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: SizedBox(
